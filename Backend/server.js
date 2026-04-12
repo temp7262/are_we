@@ -11,14 +11,18 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL || '*'
+}));
 app.use(express.json());
 
 // Serve Static Files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/certificates', express.static(path.join(__dirname, 'certificates')));
-app.use('/Frontend', express.static(path.join(__dirname, '..', 'Frontend')));
-app.use(express.static(path.join(__dirname, 'public')));
+
+// ❌ Removed: Frontend static serving (Vercel handles frontend separately)
+// app.use('/Frontend', express.static(...));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 // Main Routes
 app.use('/api/auth', require('./routes/auth'));
@@ -33,8 +37,12 @@ app.get('/', (req, res) => {
   sendResponse(res, 200, true, null, 'DigiSecure API is running');
 });
 
-const PORT = process.env.PORT || 5000;
+// ✅ Only listen locally, not on Vercel
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+module.exports = app; // ✅ Critical for Vercel
