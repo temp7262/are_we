@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Document — DigiSecure</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/home.css">
+
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-mid: #122040;
+            --navy-light: #1e3a5f;
+            --saffron: #d4781a;
+            --saffron-light: #f4a83a;
+            --saffron-pale: #fff4e6;
+            --gold: #c8a84b;
+            --white: #ffffff;
+            --cream: #faf8f3;
+            --cream-dark: #f0ede3;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --success: #16a34a;
+            --success-bg: #f0fdf4;
+            --success-border: #86efac;
+            --error: #dc2626;
+            --error-bg: #fef2f2;
+            --warn: #d97706;
+            --warn-bg: #fffbeb;
+            --warn-border: #fcd34d;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.14);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+            background: var(--cream);
+            color: var(--gray-700);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Page layout ── */
+        .page-main {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 20px 60px;
+            gap: 32px;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ── Left info panel ── */
+        .info-panel {
+            width: 300px;
+            flex-shrink: 0;
+        }
+
+        .info-panel h2 {
+            font-family: 'Noto Serif', serif;
+            font-size: 18px;
+            color: var(--navy);
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--saffron);
+        }
+
+        .info-panel p {
+            font-size: 13.5px;
+            color: var(--gray-700);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .step-list {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .step-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--cream-dark);
+            font-size: 13px;
+            color: var(--gray-700);
+            line-height: 1.5;
+        }
+
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+
+        .step-num {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--white);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .notice-box {
+            background: var(--saffron-pale);
+            border: 1px solid #f0d070;
+            border-left: 4px solid var(--saffron);
+            border-radius: var(--radius);
+            padding: 12px 14px;
+            font-size: 12.5px;
+            color: #7a5a10;
+            line-height: 1.6;
+        }
+
+        .notice-box strong {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--saffron);
+        }
+
+        /* ── Verify card ── */
+        .verify-card {
+            flex: 1;
+            max-width: 520px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--gray-300);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--navy) 0%, #1a3055 100%);
+            padding: 22px 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .card-header-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .card-header-text h2 {
+            font-family: 'Noto Serif', serif;
+            font-size: 17px;
+            color: var(--white);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .card-header-text p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.65);
+            margin-top: 2px;
+        }
+
+        .card-body {
+            padding: 28px;
+        }
+
+        /* ── Drop zone ── */
+        .drop-zone {
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-lg);
+            padding: 44px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.18s;
+            background: var(--cream);
+        }
+
+        .drop-zone:hover,
+        .drop-zone.drag-over {
+            border-color: var(--navy);
+            background: #f0f4fb;
+        }
+
+        .drop-zone.has-file {
+            border-color: var(--saffron);
+            border-style: solid;
+            background: var(--saffron-pale);
+        }
+
+        .dz-icon {
+            font-size: 38px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .dz-main {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 4px;
+        }
+
+        .dz-sub {
+            font-size: 12.5px;
+            color: var(--gray-500);
+        }
+
+        .dz-filename {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--saffron);
+            margin-top: 8px;
+            word-break: break-all;
+        }
+
+        input[type=file] {
+            display: none;
+        }
+
+        /* ── Submit button ── */
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 100%);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+            margin-top: 18px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #0d1f38, var(--navy-mid));
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(10, 22, 40, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: var(--gray-300);
+            color: var(--gray-500);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ── Loader ── */
+        .loader {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            padding: 24px 0;
+            color: var(--gray-600);
+            font-size: 13.5px;
+        }
+
+        .spinner {
+            width: 22px;
+            height: 22px;
+            border: 3px solid var(--gray-200);
+            border-top-color: var(--navy);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ── Result panels ── */
+        .result {
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            border: 1px solid transparent;
+        }
+
+        .result.authentic {
+            background: var(--success-bg);
+            border-color: var(--success-border);
+        }
+
+        .result.tampered {
+            background: var(--warn-bg);
+            border-color: var(--warn-border);
+        }
+
+        .result.notfound {
+            background: var(--error-bg);
+            border-color: #fca5a5;
+        }
+
+        .result.notembed {
+            background: #fce4ec;
+            border-color: #f48fb1;
+        }
+
+        .result.error {
+            background: var(--gray-100);
+            border-color: var(--gray-300);
+        }
+
+        .result-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .result-title {
+            font-family: 'Noto Serif', serif;
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .result.authentic .result-title {
+            color: var(--success);
+        }
+
+        .result.tampered .result-title {
+            color: var(--warn);
+        }
+
+        .result.notfound .result-title {
+            color: var(--error);
+        }
+
+        .result.notembed .result-title {
+            color: #880e4f;
+        }
+
+        .result.error .result-title {
+            color: var(--gray-700);
+        }
+
+        .result-msg {
+            font-size: 13.5px;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.65);
+            border-radius: var(--radius);
+            padding: 9px 12px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .info-item .lbl {
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            margin-bottom: 3px;
+        }
+
+        .info-item .val {
+            font-size: 13px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        /* Hash */
+        .hash-section {
+            margin-top: 12px;
+        }
+
+        .hash-label {
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            margin-bottom: 5px;
+        }
+
+        .hash-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .hash-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .hash-dot.match {
+            background: var(--success);
+        }
+
+        .hash-dot.mismatch {
+            background: var(--error);
+        }
+
+        .hash-val {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            background: rgba(0, 0, 0, 0.06);
+            padding: 4px 8px;
+            border-radius: 4px;
+            word-break: break-all;
+            flex: 1;
+            color: var(--gray-700);
+        }
+
+        /* Timeline */
+        .timeline {
+            margin-top: 14px;
+        }
+
+        .tl-heading {
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            margin-bottom: 10px;
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 10px;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+            font-size: 13px;
+        }
+
+        .tl-item:last-child {
+            border-bottom: none;
+        }
+
+        .tl-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--navy);
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+
+        .tl-actor {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .tl-action {
+            color: var(--gray-600);
+        }
+
+        .tl-comment {
+            font-size: 12px;
+            color: var(--gray-500);
+            font-style: italic;
+            margin-top: 1px;
+        }
+
+        .tl-time {
+            font-size: 11px;
+            color: var(--gray-400);
+            margin-top: 1px;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 2px 9px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 700;
+        }
+
+        .badge-green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-red {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-amber {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* Card footer */
+        .card-footer {
+            background: var(--gray-100);
+            border-top: 1px solid var(--gray-300);
+            padding: 11px 28px;
+            text-align: center;
+            font-size: 11.5px;
+            color: var(--gray-500);
+        }
+
+        @media (max-width: 768px) {
+            .page-main {
+                flex-direction: column;
+                padding: 20px 16px 40px;
+            }
+
+            .info-panel {
+                width: 100%;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-strip"></div>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <!-- Logo removed -->
+            <div class="college-text">
+                <h1>DigiSecure</h1>
+                <!-- <div class="subtitle">Nagpur, Maharashtra – 441501</div>
+ <span class="autonomous-tag">An Autonomous Institute</span> -->
+            </div>
+            <div class="header-right">
+                <!-- Helpline: 0712-000-0000<br>
+ Mon–Sat: 9:00 AM – 5:30 PM -->
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+
+
+    <nav class="nav-bar">
+        <div class="nav-bar-inner">
+            <a href="./pages/home.html" class="nav-link">Home</a>
+            <a href="./pages/documents.html" class="nav-link">Documents</a>
+            <a href="./pages/track-status.html" class="nav-link">Track Application</a>
+            <a href="./pages/help.html" class="nav-link">Help &amp; FAQ</a>
+            <a href="#" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    </div>
+
+    <main style="background:var(--cream); flex:1;">
+        <div class="page-main">
+
+            <!-- Left panel -->
+
+
+            <!-- Verify card -->
+            <div class="verify-card">
+
+                <div class="card-header">
+                    <div class="card-header-icon">🛡️</div>
+                    <div class="card-header-text">
+                        <h2>Certificate Verification</h2>
+
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                        <span class="dz-icon" id="dzIcon">📄</span>
+                        <div class="dz-main" id="dzMain">Click to choose PDF or drag &amp; drop</div>
+                        <div class="dz-sub" id="dzSub">PDF files only &middot; Max 10 MB</div>
+                        <div class="dz-filename" id="dzFilename"></div>
+                    </div>
+                    <input type="file" id="fileInput" accept=".pdf" onchange="handleFileSelect(event)">
+
+                    <button class="submit-btn" id="verifyBtn" onclick="verify()" disabled>
+                        Verify Document
+                    </button>
+
+                    <div class="loader" id="loader">
+                        <div class="spinner"></div>
+                        <span id="loaderMsg">Analysing document…</span>
+                    </div>
+
+                    <div class="result" id="result"></div>
+
+                </div>
+
+
+
+            </div><!-- /.verify-card -->
+
+        </div><!-- /.page-main -->
+    </main>
+
+
+    <script>
+        const API_BASE = 'http://127.0.0.1:5000/api';
+        let selectedFile = null;
+        const dz = document.getElementById('dropZone');
+
+        dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+        dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+        dz.addEventListener('drop', e => {
+            e.preventDefault(); dz.classList.remove('drag-over');
+            const f = e.dataTransfer.files[0];
+            if (f && f.type === 'application/pdf') setFile(f);
+        });
+
+        function handleFileSelect(e) { const f = e.target.files[0]; if (f) setFile(f); }
+
+        function setFile(f) {
+            selectedFile = f;
+            dz.classList.add('has-file');
+            document.getElementById('dzIcon').textContent = '✅';
+            document.getElementById('dzMain').textContent = 'File selected — ready to verify';
+            document.getElementById('dzSub').textContent = (f.size / 1024).toFixed(1) + ' KB';
+            document.getElementById('dzFilename').textContent = f.name;
+            document.getElementById('verifyBtn').disabled = false;
+            document.getElementById('result').style.display = 'none';
+        }
+
+        // ── Check for file passed from login.html via sessionStorage ──
+        (function checkPendingFile() {
+            try {
+                const raw = sessionStorage.getItem('vpPendingFile');
+                if (!raw) return;
+                sessionStorage.removeItem('vpPendingFile'); // consume it once
+
+                const pending = JSON.parse(raw);
+                // Convert data URL back to a File object
+                const byteString = atob(pending.data.split(',')[1]);
+                const ab = new ArrayBuffer(byteString.length);
+                const ia = new Uint8Array(ab);
+                for (let i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                const blob = new Blob([ab], { type: pending.type || 'application/pdf' });
+                const file = new File([blob], pending.name, { type: pending.type || 'application/pdf' });
+
+                // Set the file in the UI and auto-trigger verification
+                setFile(file);
+                // Small delay so the user sees the file loaded before verification starts
+                setTimeout(() => verify(), 400);
+            } catch (e) {
+                console.warn('Could not restore pending file:', e);
+            }
+        })();
+
+        function fmtDate(d) {
+            if (!d) return 'N/A';
+            return new Date(d).toLocaleDateString('en-IN', {
+                day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
+            });
+        }
+
+        const statusMap = {
+            pending: ['badge-blue', 'Pending'],
+            clerk_approved: ['badge-blue', 'Clerk Approved'],
+            hod_approved: ['badge-blue', 'HOD Approved'],
+            principal_approved: ['badge-green', 'Approved'],
+            rejected: ['badge-red', 'Rejected'],
+        };
+        function badge(s) {
+            const [cls, lbl] = statusMap[s] || ['badge-amber', s || 'Unknown'];
+            return `<span class="badge ${cls}">${lbl}</span>`;
+        }
+
+        function infoGrid(items) {
+            return `<div class="info-grid">${items.map(([l, v]) =>
+                `<div class="info-item"><div class="lbl">${l}</div><div class="val">${v}</div></div>`
+            ).join('')}</div>`;
+        }
+
+        function hashSection(original, uploaded) {
+            const ok = original === uploaded;
+            return `<div class="hash-section">
+        
+        ${!ok ? `` : ''}
+      </div>`;
+        }
+
+        function timelineSection(tl) {
+            if (!tl || !tl.length) return '';
+            return `<div class="timeline">
+        <div class="tl-heading">Approval Timeline</div>
+        ${tl.map(t => `<div class="tl-item">
+          <div class="tl-dot"></div>
+          <div>
+            <div><span class="tl-actor">${t.actor}</span> <span class="tl-action">— ${t.action}</span></div>
+            ${t.comment ? `<div class="tl-comment">"${t.comment}"</div>` : ''}
+            <div class="tl-time">${fmtDate(t.timestamp)}</div>
+          </div>
+        </div>`).join('')}
+      </div>`;
+        }
+
+        async function verify() {
+            if (!selectedFile) return;
+            document.getElementById('loader').style.display = 'flex';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('verifyBtn').disabled = true;
+
+            const msgs = ['Reading PDF metadata…', 'Computing document hash…', 'Checking against records…'];
+            let mi = 0;
+            const msgEl = document.getElementById('loaderMsg');
+            const ticker = setInterval(() => { msgEl.textContent = msgs[Math.min(++mi, msgs.length - 1)]; }, 900);
+
+            try {
+                const fd = new FormData();
+                fd.append('document', selectedFile);
+                const res = await fetch(`${API_BASE}/verify/auto`, { method: 'POST', body: fd });
+                const data = await res.json();
+                clearInterval(ticker);
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('verifyBtn').disabled = false;
+                showResult(data, res.status);
+            } catch (err) {
+                clearInterval(ticker);
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('verifyBtn').disabled = false;
+                showError('Could not reach the server. Make sure the backend is running.', err.message);
+            }
+        }
+
+        function showResult(data, httpStatus) {
+            const el = document.getElementById('result');
+            el.style.display = 'block';
+
+            if (httpStatus === 422) {
+                el.className = 'result notembed';
+                el.innerHTML = `
+          <span class="result-icon">🚫</span>
+          <div class="result-title">Not a JDCOEM Document</div>
+          <div class="result-msg">This PDF does not contain a JDCOEM DigiSecure Application ID.
+          It was not issued by this portal, or its metadata has been stripped.</div>`;
+                return;
+            }
+            if (httpStatus === 404) {
+                el.className = 'result notfound';
+                el.innerHTML = `
+          <span class="result-icon">❓</span>
+          <div class="result-title">Document Not Found</div>
+          <div class="result-msg">Application ID <strong>${data.data?.applicationId || ''}</strong>
+          was detected in the PDF, but no matching issued certificate exists in the system.</div>`;
+                return;
+            }
+            if (!data.success || !data.data) { showError(data.message || 'Unknown error'); return; }
+
+            const d = data.data;
+            if (d.match) {
+                el.className = 'result authentic';
+                el.innerHTML = `
+          <span class="result-icon">✅</span>
+          <div class="result-title">Document Authentic</div>
+          <div class="result-msg">This certificate is original and has not been modified
+          since it was issued by JDCOEM DigiSecure.</div>
+          ${infoGrid([
+                    ['Student', d.studentName],
+                    ['Document Type', d.documentType],
+                    ['Application ID', d.applicationId],
+                    ['Status', badge(d.status)],
+                    ['Issued On', fmtDate(d.issuedAt)],
+                    ['Verified At', fmtDate(d.verifiedAt)],
+                ])}
+          ${hashSection(d.originalHash, d.uploadedHash)}
+          ${timelineSection(d.timeline)}`;
+            } else {
+                el.className = 'result tampered';
+                el.innerHTML = `
+          <span class="result-icon">⚠️</span>
+          <div class="result-title">Integrity Check Failed</div>
+          <div class="result-msg">Application ID <strong>${d.applicationId}</strong> was found,
+          but the file content does not match the original issued copy.
+          This document may have been tampered with.</div>
+          ${infoGrid([
+                    ['Student', d.studentName],
+                    ['Document Type', d.documentType],
+                    ['Application ID', d.applicationId],
+                    ['Issued On', fmtDate(d.issuedAt)],
+                ])}
+          ${hashSection(d.originalHash, d.uploadedHash)}`;
+            }
+        }
+
+        function showError(msg, detail) {
+            const el = document.getElementById('result');
+            el.className = 'result error';
+            el.style.display = 'block';
+            el.innerHTML = `
+        <span class="result-icon">⚠️</span>
+        <div class="result-title">Connection Error</div>
+        <div class="result-msg">${msg}</div>
+        ${detail ? `<div style="font-size:12px;color:var(--gray-400);margin-top:6px;">${detail}</div>` : ''}`;
+        }
+    </script>
+
+</body>
+
+</html>

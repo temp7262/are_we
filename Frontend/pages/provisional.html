@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Provisional Certificate Request â€“ JDCOEM Portal</title>
+ <link
+ href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+ rel="stylesheet">
+ <link rel="stylesheet" href="../css/bonafide.css">
+</head>
+
+<body>
+
+ <header class="site-header">
+ <div class="header-inner">
+ <div class="header-divider"></div>
+ <div class="header-spacer"></div>
+ <div class="user-chip">
+ <div class="user-avatar" id="userInitials">?</div>
+ <div>
+ <div class="user-name-text" id="userName">Loadingâ€¦</div>
+ <div class="user-id-text" id="userId"></div>
+ </div>
+ </div>
+ <button class="logout-btn" onclick="logout()"> Logout</button>
+ </div>
+ </header>
+
+ <div class="layout">
+ <aside class="sidebar">
+ <span class="nav-section-label">Main Menu</span>
+ <a class="nav-item" href="home.html">Dashboard</a>
+ <a class="nav-item active" href="documents.html">Apply for Document</a>
+ <a class="nav-item" href="dashboard.html">My Applications <span
+ class="nav-badge">0</span></a>
+ </aside>
+
+ <main class="main">
+ <div class="breadcrumb fu">
+ <a href="home.html"> Home</a>
+ <span class="sep">â€º</span>
+ <a href="documents.html">Documents</a>
+ <span class="sep">â€º</span>
+ <span class="current"> Provisional Certificate</span>
+ </div>
+
+ <div class="doc-banner fu fu1">
+ <div class="banner-icon"></div>
+ <div class="banner-text">
+ <h2>Provisional Degree Certificate</h2>
+ <p>Issued to students who have completed their degree requirements but haven't received their
+ original degree in the convocation yet.</p>
+ <div class="banner-pills">
+ <div class="banner-pill"> Processing: <strong>5 Working Days</strong></div>
+ <div class="banner-pill"> Issued by: <strong>Registrar Office</strong></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="form-card fu fu2">
+ <div class="form-card-header">
+ <h3>Completion Details</h3>
+ </div>
+ <div class="form-card-body">
+ <div class="input-grid-2">
+ <div class="field-group">
+ <label>Passing Month <span class="req">*</span></label>
+ <select id="passingMonth">
+ <option value="">Select Month</option>
+ <option>June</option>
+ <option>December</option>
+ </select>
+ </div>
+ <div class="field-group">
+ <label>Passing Year <span class="req">*</span></label>
+ <input type="number" id="passingYear" placeholder="e.g. 2024">
+ </div>
+ </div>
+ <div class="input-grid-2">
+ <div class="field-group">
+ <label>CGPA / Percentage <span class="req">*</span></label>
+ <input type="text" id="resultPointer" placeholder="e.g. 8.45">
+ </div>
+ <div class="field-group">
+ <label>Division/Grade <span class="req">*</span></label>
+ <select id="grade">
+ <option value="">Select Grade</option>
+ <option>First Division with Distinction</option>
+ <option>First Division</option>
+ <option>Second Division</option>
+ </select>
+ </div>
+ </div>
+ <div class="field-group">
+ <label>Reason for Urgent Requirement <span class="req">*</span></label>
+ <textarea id="purpose"
+ placeholder="e.g. For higher studies admission, for job joining..."></textarea>
+ </div>
+ </div>
+ </div>
+
+ <div class="form-card fu fu3">
+ <div class="form-card-header">
+ <h3>Required Uploads</h3>
+ </div>
+ <div class="form-card-body">
+ <div class="upload-group">
+ <label>Final Semester Mark Sheet (Self-Attested) <span class="req">*</span></label>
+ <div class="drop-zone" id="dz-finalMarksheet" ondragover="onDragOver(event,'finalMarksheet')"
+ ondragleave="onDragLeave('finalMarksheet')"
+ ondrop="onDrop(event,'finalMarksheet',5,['application/pdf'])">
+ <div class="dz-default-content" id="dzd-finalMarksheet">
+ <span class="dz-icon"></span>
+ <div class="dz-text">Upload PDF</div>
+ </div>
+ <input type="file" accept=".pdf"
+ onchange="onFileInput(this,'finalMarksheet',5,['application/pdf'])">
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="submit-card fu fu4">
+ <button class="btn-primary" onclick="submitForm()"> Apply for Provisional</button>
+ </div>
+ </main>
+ </div>
+
+ <div class="modal-overlay" id="successModal">
+ <div class="modal-box">
+ <h3>Application Submitted!</h3>
+ <p>Your Provisional Certificate application is under review.</p>
+ <div class="modal-app-id" id="modalAppId">APP-000000</div>
+ <button class="mbtn-p" onclick="window.location.href='dashboard.html'">Check Status</button>
+ </div>
+ </div>
+
+ <footer class="site-footer">
+    <div class="footer-grid" style="grid-template-columns:1fr;max-width:900px;margin:0 auto;">
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="home.html">Dashboard</a></li>
+          <li><a href="documents.html">Apply for Document</a></li>
+          <li><a href="dashboard.html">My Applications</a></li>
+          <li><a href="track-status.html">Track Application</a></li>
+          <li><a href="download.html">Download Documents</a></li>
+          <li><a href="profile.html">My Profile</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Student Digital Document Services Portal. All Rights Reserved.</div>
+  </footer>
+
+ <script src="/college-portal/public/js/provisional.js"></script>
+<script src="../js/header-info.js"></script>
+</body>
+
+</html>

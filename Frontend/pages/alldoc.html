@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Apply for Document â€“ JDCOEM Portal</title>
+ <link
+ href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+ rel="stylesheet">
+ <style>
+ :root {
+ --navy: #0a1628;
+ --navy-mid: #122040;
+ --navy-light: #1e3a5f;
+ --saffron: #d4781a;
+ --saffron-light: #f4a83a;
+ --saffron-pale: #fff4e6;
+ --white: #ffffff;
+ --g50: #f9fafb;
+ --g100: #f3f4f6;
+ --g200: #e5e7eb;
+ --g300: #d1d5db;
+ --g400: #9ca3af;
+ --g500: #6b7280;
+ --g600: #4b5563;
+ --g700: #374151;
+ --g900: #111827;
+ --success: #16a34a;
+ --success-bg: #f0fdf4;
+ --error: #dc2626;
+ --error-bg: #fef2f2;
+ --info: #3b82f6;
+ --info-bg: #eff6ff;
+ --radius: 8px;
+ --radius-lg: 12px;
+ --radius-xl: 16px;
+ --shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+ --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.13);
+ --header: 68px;
+ --sidebar: 260px;
+ }
+
+ * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+
+ html {
+ scroll-behavior: smooth;
+ }
+
+ body {
+ font-family: 'DM Sans', sans-serif;
+ background: var(--g50);
+ color: var(--g700);
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ }
+
+ /* â”€â”€ LAYOUT â”€â”€ */
+ .layout {
+ display: flex;
+ flex: 1;
+ }
+
+ /* â”€â”€ SIDEBAR â”€â”€ */
+ .sidebar {
+ width: var(--sidebar);
+ flex-shrink: 0;
+ background: var(--white);
+ border-right: 1px solid var(--g200);
+ position: sticky;
+ top: 0;
+ height: 100vh;
+ overflow-y: auto;
+ padding: 20px 0;
+ display: flex;
+ flex-direction: column;
+ gap: 4px;
+ }
+
+ .nav-section-label {
+ font-size: 10px;
+ font-weight: 700;
+ color: var(--g400);
+ letter-spacing: 1.2px;
+ text-transform: uppercase;
+ padding: 12px 20px 4px;
+ }
+
+ .nav-item {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ padding: 10px 20px;
+ margin: 0 8px;
+ border-radius: var(--radius);
+ text-decoration: none;
+ font-size: 13.5px;
+ font-weight: 500;
+ color: var(--g600);
+ cursor: pointer;
+ transition: all 0.2s;
+ }
+
+ .nav-item:hover {
+ background: var(--g50);
+ color: var(--g900);
+ }
+
+ .nav-item.active {
+ background: var(--saffron-pale);
+ color: var(--saffron);
+ font-weight: 600;
+ }
+
+ .nav-icon {
+ font-size: 17px;
+ width: 20px;
+ text-align: center;
+ }
+
+ .nav-badge {
+ margin-left: auto;
+ background: var(--saffron);
+ color: var(--white);
+ font-size: 10px;
+ font-weight: 700;
+ padding: 1px 7px;
+ border-radius: 20px;
+ }
+
+ /* â”€â”€ MAIN â”€â”€ */
+ .main {
+ flex: 1;
+ display: flex;
+ flex-direction: column;
+ min-width: 0;
+ padding: 0 0 48px;
+ }
+
+ /* â”€â”€ PAGE HERO â”€â”€ */
+ .page-hero {
+ background: linear-gradient(135deg, var(--navy) 0%, #1a3a60 50%, #0f2a4a 100%);
+ padding: 40px 40px 48px;
+ position: relative;
+ overflow: hidden;
+ }
+
+ .page-hero::before {
+ content: '';
+ position: absolute;
+ right: -80px;
+ top: -80px;
+ width: 300px;
+ height: 300px;
+ border-radius: 50%;
+ background: rgba(255, 255, 255, 0.03);
+ pointer-events: none;
+ }
+
+ .page-hero::after {
+ content: '';
+ position: absolute;
+ left: 30%;
+ bottom: -100px;
+ width: 250px;
+ height: 250px;
+ border-radius: 50%;
+ background: rgba(212, 120, 26, 0.08);
+ pointer-events: none;
+ }
+
+ .hero-breadcrumb {
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ font-size: 13px;
+ color: rgba(255, 255, 255, 0.45);
+ margin-bottom: 14px;
+ position: relative;
+ z-index: 1;
+ }
+
+ .hero-breadcrumb a {
+ color: rgba(255, 255, 255, 0.45);
+ text-decoration: none;
+ transition: color 0.2s;
+ }
+
+ .hero-breadcrumb a:hover {
+ color: var(--saffron-light);
+ }
+
+ .hero-breadcrumb .sep {
+ color: rgba(255, 255, 255, 0.25);
+ }
+
+ .hero-breadcrumb .cur {
+ color: rgba(255, 255, 255, 0.8);
+ font-weight: 500;
+ }
+
+ .hero-title {
+ font-family: 'Noto Serif', serif;
+ font-size: 32px;
+ font-weight: 700;
+ color: var(--white);
+ line-height: 1.25;
+ margin-bottom: 8px;
+ position: relative;
+ z-index: 1;
+ }
+
+ .hero-subtitle {
+ font-size: 15px;
+ color: rgba(255, 255, 255, 0.65);
+ position: relative;
+ z-index: 1;
+ }
+
+ /* â”€â”€ CONTENT AREA â”€â”€ */
+ .content-area {
+ padding: 32px 40px;
+ }
+
+ /* â”€â”€ CARD â”€â”€ */
+ .card {
+ background: var(--white);
+ border-radius: var(--radius-xl);
+ border: 1px solid var(--g200);
+ padding: 28px;
+ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+ margin-bottom: 24px;
+ }
+
+ .card-header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ margin-bottom: 24px;
+ padding-bottom: 16px;
+ border-bottom: 2px solid var(--g100);
+ }
+
+ .card-title {
+ font-family: 'Noto Serif', serif;
+ font-size: 19px;
+ font-weight: 700;
+ color: var(--g900);
+ display: flex;
+ align-items: center;
+ gap: 10px;
+ }
+
+ .card-icon {
+ font-size: 22px;
+ }
+
+ /* â”€â”€ FORM â”€â”€ */
+ .form-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+ gap: 18px;
+ margin-bottom: 18px;
+ }
+
+ .form-field {
+ margin-bottom: 18px;
+ }
+
+ .form-label {
+ display: block;
+ font-size: 12px;
+ font-weight: 700;
+ color: var(--g600);
+ text-transform: uppercase;
+ letter-spacing: 0.8px;
+ margin-bottom: 8px;
+ }
+
+ .form-label.required::after {
+ content: ' *';
+ color: var(--error);
+ }
+
+ .form-input,
+ .form-select,
+ .form-textarea {
+ width: 100%;
+ padding: 12px 16px;
+ border: 1.5px solid var(--g200);
+ border-radius: var(--radius-lg);
+ font-family: 'DM Sans', sans-serif;
+ font-size: 14px;
+ color: var(--g900);
+ outline: none;
+ transition: all 0.2s;
+ background: var(--white);
+ }
+
+ .form-input:focus,
+ .form-select:focus,
+ .form-textarea:focus {
+ border-color: var(--saffron);
+ box-shadow: 0 0 0 4px rgba(212, 120, 26, 0.08);
+ }
+
+ .form-input:disabled,
+ .form-select:disabled {
+ background: var(--g50);
+ color: var(--g500);
+ cursor: not-allowed;
+ }
+
+ .form-textarea {
+ resize: vertical;
+ min-height: 110px;
+ line-height: 1.7;
+ }
+
+ .form-file {
+ padding: 10px;
+ }
+
+ .form-help {
+ font-size: 12px;
+ color: var(--g400);
+ margin-top: 6px;
+ line-height: 1.4;
+ }
+
+ .form-error {
+ font-size: 12px;
+ color: var(--error);
+ margin-top: 6px;
+ display: none;
+ font-weight: 600;
+ }
+
+ .form-field.error .form-input,
+ .form-field.error .form-select,
+ .form-field.error .form-textarea {
+ border-color: var(--error);
+ background: var(--error-bg);
+ }
+
+ .form-field.error .form-error {
+ display: block;
+ }
+
+ /* â”€â”€ INFO BOX â”€â”€ */
+ .info-box {
+ background: linear-gradient(135deg, var(--info-bg), #dbeafe);
+ border: 1px solid #bfdbfe;
+ border-radius: var(--radius-lg);
+ padding: 18px;
+ margin-bottom: 24px;
+ display: flex;
+ align-items: flex-start;
+ gap: 14px;
+ }
+
+ .info-box-icon {
+ font-size: 22px;
+ flex-shrink: 0;
+ color: var(--info);
+ }
+
+ .info-box-text {
+ font-size: 13px;
+ color: var(--navy-light);
+ line-height: 1.7;
+ }
+
+ .info-box-text strong {
+ color: var(--navy);
+ font-weight: 700;
+ }
+
+ /* â”€â”€ CHECKBOX â”€â”€ */
+ .checkbox-wrapper {
+ display: flex;
+ align-items: flex-start;
+ gap: 14px;
+ padding: 20px;
+ background: linear-gradient(135deg, var(--info-bg), #dbeafe);
+ border: 1.5px solid #bfdbfe;
+ border-radius: var(--radius-xl);
+ margin-bottom: 28px;
+ }
+
+ .checkbox-wrapper input[type="checkbox"] {
+ width: 22px;
+ height: 22px;
+ cursor: pointer;
+ margin-top: 2px;
+ flex-shrink: 0;
+ accent-color: var(--saffron);
+ }
+
+ .checkbox-label {
+ font-size: 14px;
+ color: var(--navy);
+ line-height: 1.7;
+ cursor: pointer;
+ font-weight: 500;
+ }
+
+ /* â”€â”€ BUTTONS â”€â”€ */
+ .btn-group {
+ display: flex;
+ gap: 14px;
+ flex-wrap: wrap;
+ }
+
+ .btn {
+ padding: 14px 32px;
+ border-radius: var(--radius-xl);
+ font-family: 'DM Sans', sans-serif;
+ font-size: 15px;
+ font-weight: 700;
+ cursor: pointer;
+ transition: all 0.25s;
+ border: none;
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ gap: 10px;
+ }
+
+ .btn-primary {
+ background: linear-gradient(135deg, var(--saffron), var(--saffron-light));
+ color: var(--white);
+ box-shadow: 0 6px 20px rgba(212, 120, 26, 0.35);
+ }
+
+ .btn-primary:hover {
+ transform: translateY(-3px);
+ box-shadow: 0 10px 28px rgba(212, 120, 26, 0.45);
+ }
+
+ .btn-primary:active {
+ transform: translateY(-1px);
+ }
+
+ .btn-primary:disabled {
+ opacity: 0.5;
+ cursor: not-allowed;
+ transform: none;
+ }
+
+ .btn-secondary {
+ background: var(--white);
+ color: var(--g700);
+ border: 2px solid var(--g300);
+ }
+
+ .btn-secondary:hover {
+ background: var(--g100);
+ border-color: var(--g500);
+ }
+
+ /* â”€â”€ DYNAMIC SECTION â”€â”€ */
+ .dynamic-section {
+ display: none;
+ }
+
+ .dynamic-section.active {
+ display: block;
+ animation: fadeIn 0.45s ease;
+ }
+
+ @keyframes fadeIn {
+ from {
+ opacity: 0;
+ transform: translateY(20px)
+ }
+
+ to {
+ opacity: 1;
+ transform: none
+ }
+ }
+
+ /* â”€â”€ SUCCESS MODAL â”€â”€ */
+ .modal-overlay {
+ display: none;
+ position: fixed;
+ inset: 0;
+ background: rgba(0, 0, 0, 0.6);
+ z-index: 999;
+ align-items: center;
+ justify-content: center;
+ backdrop-filter: blur(8px);
+ padding: 20px;
+ }
+
+ .modal-overlay.open {
+ display: flex;
+ animation: fadeInModal 0.3s ease;
+ }
+
+ @keyframes fadeInModal {
+ from {
+ opacity: 0
+ }
+
+ to {
+ opacity: 1
+ }
+ }
+
+ .modal {
+ background: var(--white);
+ border-radius: var(--radius-xl);
+ width: 100%;
+ max-width: 520px;
+ padding: 48px;
+ text-align: center;
+ box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+ animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+ }
+
+ @keyframes slideUp {
+ from {
+ transform: scale(0.85) translateY(40px);
+ opacity: 0
+ }
+
+ to {
+ transform: scale(1) translateY(0);
+ opacity: 1
+ }
+ }
+
+ .modal-icon {
+ font-size: 80px;
+ margin-bottom: 24px;
+ animation: bounce 0.6s ease;
+ }
+
+ @keyframes bounce {
+
+ 0%,
+ 100% {
+ transform: scale(1)
+ }
+
+ 50% {
+ transform: scale(1.1)
+ }
+ }
+
+ .modal h2 {
+ font-family: 'Noto Serif', serif;
+ font-size: 26px;
+ color: var(--navy);
+ margin-bottom: 14px;
+ font-weight: 700;
+ }
+
+ .modal p {
+ font-size: 15px;
+ color: var(--g500);
+ margin-bottom: 10px;
+ line-height: 1.7;
+ }
+
+ .modal .app-id {
+ font-size: 22px;
+ font-weight: 800;
+ color: var(--saffron);
+ margin: 24px 0;
+ padding: 16px;
+ background: var(--saffron-pale);
+ border-radius: var(--radius-lg);
+ border: 2px dashed var(--saffron);
+ letter-spacing: 1px;
+ }
+
+ .modal .btn {
+ width: 100%;
+ margin-top: 24px;
+ }
+
+ /* â”€â”€ FOOTER â”€â”€ */
+ .site-footer {
+ background: var(--navy);
+ color: rgba(255, 255, 255, 0.6);
+ padding: 36px 40px;
+ margin-top: auto;
+ }
+
+ .footer-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+ gap: 36px;
+ margin-bottom: 28px;
+ }
+
+ .footer-brand {
+ font-family: 'Noto Serif', serif;
+ }
+
+ .footer-brand h3 {
+ font-size: 17px;
+ color: var(--white);
+ margin-bottom: 10px;
+ font-weight: 700;
+ }
+
+ .footer-brand p {
+ font-size: 12px;
+ color: rgba(255, 255, 255, 0.4);
+ margin-bottom: 16px;
+ }
+
+ .footer-contact {
+ font-size: 12px;
+ line-height: 1.8;
+ }
+
+ .footer-contact a {
+ color: var(--saffron-light);
+ text-decoration: none;
+ transition: color 0.2s;
+ }
+
+ .footer-contact a:hover {
+ color: var(--white);
+ }
+
+ .footer-col h4 {
+ font-size: 14px;
+ color: var(--white);
+ margin-bottom: 14px;
+ font-weight: 700;
+ }
+
+ .footer-col ul {
+ list-style: none;
+ }
+
+ .footer-col ul li {
+ font-size: 12px;
+ margin-bottom: 10px;
+ color: rgba(255, 255, 255, 0.5);
+ cursor: pointer;
+ transition: color 0.2s;
+ }
+
+ .footer-col ul li:hover {
+ color: var(--saffron-light);
+ }
+
+ .footer-bottom {
+ text-align: center;
+ padding-top: 24px;
+ border-top: 1px solid rgba(255, 255, 255, 0.1);
+ font-size: 11px;
+ color: rgba(255, 255, 255, 0.4);
+ }
+
+ /* â”€â”€ RESPONSIVE â”€â”€ */
+ @media(max-width:1024px) {
+ .sidebar {
+ display: none;
+ }
+
+ .content-area,
+ .page-hero {
+ padding-left: 24px;
+ padding-right: 24px;
+ }
+ }
+
+ @media(max-width:768px) {
+ .form-grid {
+ grid-template-columns: 1fr;
+ }
+
+ .btn-group {
+ flex-direction: column;
+ }
+
+ .btn {
+ width: 100%;
+ }
+
+ .card {
+ padding: 20px;
+ }
+
+ .page-hero {
+ padding: 32px 20px 40px;
+ }
+
+ .hero-title {
+ font-size: 26px;
+ }
+ }
+
+ @media(max-width:480px) {
+ .modal {
+ padding: 32px 24px;
+ }
+
+ .modal-icon {
+ font-size: 64px;
+ }
+
+ .modal h2 {
+ font-size: 22px;
+ }
+ }
+
+ /* â”€â”€ ANIMATIONS â”€â”€ */
+ @keyframes fadeUp {
+ from {
+ opacity: 0;
+ transform: translateY(24px)
+ }
+
+ to {
+ opacity: 1;
+ transform: none
+ }
+ }
+
+ .card {
+ animation: fadeUp 0.6s ease both;
+ }
+
+ .card:nth-child(1) {
+ animation-delay: 0.1s;
+ }
+
+ .card:nth-child(2) {
+ animation-delay: 0.2s;
+ }
+
+ .card:nth-child(3) {
+ animation-delay: 0.3s;
+ }
+
+ .card:nth-child(4) {
+ animation-delay: 0.4s;
+ }
+ </style>
+</head>
+
+<body>
+
+ <!-- â”€â”€ LAYOUT â”€â”€ -->
+ <div class="layout">
+
+ <!-- SIDEBAR -->
+ <aside class="sidebar">
+ <span class="nav-section-label">Main Menu</span>
+ <a class="nav-item" href="home.html">
+ Dashboard
+ </a>
+ <a class="nav-item active" href="documents.html">
+ Apply for Document
+ </a>
+ <a class="nav-item" href="dashboard.html">
+ My Applications
+ <span class="nav-badge">2</span>
+ </a>
+ <a class="nav-item" href="#">
+ Track Status
+ </a>
+ <a class="nav-item" href="#">
+ Downloads
+ </a>
+ <span class="nav-section-label" style="margin-top:8px;">Account</span>
+ <a class="nav-item" href="profile.html">
+ My Profile
+ </a>
+ <a class="nav-item" href="#">
+ Notifications
+ <span class="nav-badge">3</span>
+ </a>
+ <a class="nav-item" href="#">
+ Help &amp; Support
+ </a>
+ </aside>
+
+ <!-- MAIN -->
+ <main class="main">
+
+ <!-- PAGE HERO -->
+ <div class="page-hero">
+ <div class="hero-breadcrumb">
+ <a href="home.html"> Home</a>
+ <span class="sep">â€º</span>
+ <span class="cur">Apply for Document</span>
+ </div>
+ <h1 class="hero-title"> Apply for Document</h1>
+ <p class="hero-subtitle">Submit your document request online. All fields marked with * are mandatory.
+ </p>
+ </div>
+
+ <!-- CONTENT AREA -->
+ <div class="content-area">
+
+ <!-- INFO BOX -->
+ <div class="info-box">
+ <div class="info-box-text">
+ <strong>Important:</strong> Please ensure all information is accurate. Processing time is
+ typically <strong>3-5 working days</strong> for most documents. You will receive email
+ notifications at each stage of processing.
+ </div>
+ </div>
+
+ <!-- FORM -->
+ <form id="applicationForm">
+
+ <!-- 1âƒ£ STUDENT DETAILS (READ-ONLY) -->
+ <div class="card">
+ <div class="card-header">
+ <h2 class="card-title">Student Details</h2>
+ </div>
+ <div class="form-grid">
+ <div class="form-field">
+ <label class="form-label">Student Name</label>
+ <input type="text" class="form-input" id="studentName" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Roll Number</label>
+ <input type="text" class="form-input" id="rollNumber" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">BT / University ID</label>
+ <input type="text" class="form-input" id="btId" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Department</label>
+ <input type="text" class="form-input" id="department" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Programme</label>
+ <input type="text" class="form-input" id="programme" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Year / Semester</label>
+ <input type="text" class="form-input" id="yearSem" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">College Email</label>
+ <input type="email" class="form-input" id="email" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Mobile Number</label>
+ <input type="tel" class="form-input" id="mobile" readonly>
+ </div>
+ </div>
+ </div>
+
+ <!-- 2âƒ£ DOCUMENT TYPE SELECTION -->
+ <div class="card">
+ <div class="card-header">
+ <h2 class="card-title">Document Type</h2>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Select Document Type</label>
+ <select class="form-select" id="docType" required>
+ <option value="">-- Select Document --</option>
+ <option value="tc">Transfer Certificate (TC)</option>
+ <option value="noc">No Objection Certificate (NOC)</option>
+ <option value="transcript">Official Transcript</option>
+ <option value="character">Character Certificate</option>
+ </select>
+ <span class="form-error">Please select a document type</span>
+ </div>
+ </div>
+
+ <!-- 3âƒ£ DYNAMIC FIELDS CONTAINER -->
+ <div id="dynamicFieldsContainer"></div>
+
+ <!-- 4âƒ£ COMMON UPLOAD SECTION -->
+ <div class="card" id="uploadSection" style="display:none;">
+ <div class="card-header">
+ <h2 class="card-title">Supporting Documents</h2>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Upload Supporting Documents (Optional)</label>
+ <input type="file" class="form-input form-file" id="supportingDocs" multiple
+ accept=".pdf,.jpg,.jpeg,.png">
+ <span class="form-help">Accepted formats: PDF, JPG, PNG (Max 5MB per file). You can upload
+ multiple files.</span>
+ </div>
+ </div>
+
+ <!-- 5âƒ£ DECLARATION -->
+ <div id="declarationSection" style="display:none;">
+ <div class="checkbox-wrapper">
+ <input type="checkbox" id="declaration" required>
+ <label class="checkbox-label" for="declaration">
+ I hereby declare that the information provided above is true and correct to the best of
+ my knowledge. I understand that any false information may lead to rejection of my
+ application or disciplinary action.
+ </label>
+ </div>
+
+ <!-- SUBMIT BUTTONS -->
+ <div class="btn-group">
+ <button type="submit" class="btn btn-primary" id="submitBtn">
+ <span></span> Submit Application
+ </button>
+ <button type="button" class="btn btn-secondary" onclick="resetForm()">
+ <span>â†»</span> Reset Form
+ </button>
+ </div>
+ </div>
+
+ </form>
+
+ </div>
+
+ </main>
+ </div>
+
+ <!-- SUCCESS MODAL -->
+ <div class="modal-overlay" id="successModal">
+ <div class="modal">
+ <h2>Application Submitted Successfully!</h2>
+ <p>Your document request has been received and is being processed.</p>
+ <p class="app-id">Application ID: <span id="appIdDisplay"></span></p>
+ <p>You can track your application status using this ID. A confirmation email has been sent to your
+ registered email address.</p>
+ <button class="btn btn-primary" onclick="window.location.href='dashboard.html'">
+ <span></span> View My Applications
+ </button>
+ </div>
+ </div>
+
+ <!-- FOOTER -->
+ <footer class="site-footer">
+    <div class="footer-grid" style="grid-template-columns:1fr;max-width:900px;margin:0 auto;">
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="home.html">Dashboard</a></li>
+          <li><a href="documents.html">Apply for Document</a></li>
+          <li><a href="dashboard.html">My Applications</a></li>
+          <li><a href="track-status.html">Track Application</a></li>
+          <li><a href="download.html">Download Documents</a></li>
+          <li><a href="profile.html">My Profile</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Student Digital Document Services Portal. All Rights Reserved.</div>
+  </footer>
+
+ <!-- JAVASCRIPT -->
+ <script>
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ // 1âƒ£ LOAD STUDENT DATA FROM LOCALSTORAGE
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ // (function loadStudentData() {
+ // const raw = localStorage.getItem('user');
+ // if (!raw) {
+ // alert('Please login first');
+ // window.location.href = 'login.html';
+ // return;
+ // }
+ // const user = JSON.parse(raw);
+ // document.getElementById('studentName').value = user.name || user.fullName || 'Student Name';
+ // document.getElementById('rollNumber').value = user.rollNo || '2022BTCS001';
+ // document.getElementById('btId').value = user.btid || user.btId || 'BT2022001';
+ // document.getElementById('department').value = user.department || user.branch || 'Computer Science & Engineering';
+ // document.getElementById('programme').value = 'B.Tech (Bachelor of Technology)';
+ // document.getElementById('yearSem').value = user.year || 'Third Year, Semester VI';
+ // document.getElementById('email').value = user.email || 'student@jdcoem.ac.in';
+ // document.getElementById('mobile').value = user.phone || user.mobile || '+91 98765 43210';
+ // })();
+
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ // 2âƒ£ DOCUMENT TYPE TEMPLATES (ONLY 4 DOCUMENTS)
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ const documentTemplates = {
+ tc: `
+ <div class="card dynamic-section active">
+ <div class="card-header">
+ <h2 class="card-title">Transfer Certificate Details</h2>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Reason for Leaving</label>
+ <textarea class="form-textarea" name="reason" required placeholder="Please explain your reason for leaving the college in detail..."></textarea>
+ <span class="form-error">Reason is required</span>
+ </div>
+ <div class="form-grid">
+ <div class="form-field">
+ <label class="form-label required">Last Attended Semester</label>
+ <select class="form-select" name="lastSemester" required>
+ <option value="">-- Select Semester --</option>
+ <option value="1">Semester I</option>
+ <option value="2">Semester II</option>
+ <option value="3">Semester III</option>
+ <option value="4">Semester IV</option>
+ <option value="5">Semester V</option>
+ <option value="6">Semester VI</option>
+ <option value="7">Semester VII</option>
+ <option value="8">Semester VIII</option>
+ </select>
+ <span class="form-error">Last semester is required</span>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Last Attendance Date</label>
+ <input type="date" class="form-input" name="lastDate" required>
+ <span class="form-error">Last attendance date is required</span>
+ </div>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Upload Clearance Proof</label>
+ <input type="file" class="form-input form-file" name="clearance" accept=".pdf" required>
+ <span class="form-help">Library No-Dues & Fee Clearance Certificate (PDF only, Max 5MB)</span>
+ <span class="form-error">Clearance proof is required</span>
+ </div>
+ </div>
+ `,
+ noc: `
+ <div class="card dynamic-section active">
+ <div class="card-header">
+ <h2 class="card-title">No Objection Certificate Details</h2>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Purpose of NOC</label>
+ <select class="form-select" name="purpose" required>
+ <option value="">-- Select Purpose --</option>
+ <option value="internship">Internship</option>
+ <option value="project">Project Work / Industrial Training</option>
+ <option value="passport">Passport Application</option>
+ <option value="exam">External Exam / Certification</option>
+ <option value="competition">Competition / Event Participation</option>
+ <option value="other">Other (Please Specify)</option>
+ </select>
+ <span class="form-error">Purpose is required</span>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Organization / Institution Name</label>
+ <input type="text" class="form-input" name="organization" required placeholder="Enter full organization name">
+ <span class="form-error">Organization name is required</span>
+ </div>
+ <div class="form-grid">
+ <div class="form-field">
+ <label class="form-label required">Validity Period (From)</label>
+ <input type="date" class="form-input" name="validityFrom" required>
+ <span class="form-error">Start date is required</span>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Validity Period (To)</label>
+ <input type="date" class="form-input" name="validityTo" required>
+ <span class="form-error">End date is required</span>
+ </div>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Upload Supporting Letter / Request Letter</label>
+ <input type="file" class="form-input form-file" name="supportingLetter" accept=".pdf">
+ <span class="form-help">Request letter from organization (if applicable) - PDF format, Max 5MB</span>
+ </div>
+ </div>
+ `,
+ transcript: `
+ <div class="card dynamic-section active">
+ <div class="card-header">
+ <h2 class="card-title">Official Transcript Details</h2>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Programme</label>
+ <input type="text" class="form-input" name="programme" value="B.Tech (Bachelor of Technology)" readonly>
+ </div>
+ <div class="form-grid">
+ <div class="form-field">
+ <label class="form-label required">Semester Range (From)</label>
+ <select class="form-select" name="semesterFrom" required>
+ <option value="">-- Select --</option>
+ <option value="1">Semester I</option>
+ <option value="2">Semester II</option>
+ <option value="3">Semester III</option>
+ <option value="4">Semester IV</option>
+ <option value="5">Semester V</option>
+ <option value="6">Semester VI</option>
+ <option value="7">Semester VII</option>
+ <option value="8">Semester VIII</option>
+ </select>
+ <span class="form-error">Start semester is required</span>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Semester Range (To)</label>
+ <select class="form-select" name="semesterTo" required>
+ <option value="">-- Select --</option>
+ <option value="1">Semester I</option>
+ <option value="2">Semester II</option>
+ <option value="3">Semester III</option>
+ <option value="4">Semester IV</option>
+ <option value="5">Semester V</option>
+ <option value="6">Semester VI</option>
+ <option value="7">Semester VII</option>
+ <option value="8">Semester VIII</option>
+ </select>
+ <span class="form-error">End semester is required</span>
+ </div>
+ </div>
+ <div class="form-grid">
+ <div class="form-field">
+ <label class="form-label required">Number of Copies</label>
+ <input type="number" class="form-input" name="copies" min="1" max="5" value="1" required>
+ <span class="form-help">Maximum 5 copies allowed</span>
+ <span class="form-error">Number of copies is required</span>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Purpose</label>
+ <select class="form-select" name="purpose" required>
+ <option value="">-- Select Purpose --</option>
+ <option value="higher-studies">Higher Studies / University Application</option>
+ <option value="employment">Employment / Job Application</option>
+ <option value="visa">Visa / Immigration</option>
+ <option value="scholarship">Scholarship Application</option>
+ <option value="other">Other</option>
+ </select>
+ <span class="form-error">Purpose is required</span>
+ </div>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Upload Previous Mark Sheets (Optional)</label>
+ <input type="file" class="form-input form-file" name="marksheets" accept=".pdf" multiple>
+ <span class="form-help">All semester marksheets (PDF format, Max 5MB each). Multiple files allowed.</span>
+ </div>
+ </div>
+ `,
+ character: `
+ <div class="card dynamic-section active">
+ <div class="card-header">
+ <h2 class="card-title">Character Certificate Details</h2>
+ </div>
+ <div class="form-grid">
+ <div class="form-field">
+ <label class="form-label required">Period of Study (From)</label>
+ <input type="month" class="form-input" name="periodFrom" required>
+ <span class="form-error">Start date is required</span>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Period of Study (To)</label>
+ <input type="month" class="form-input" name="periodTo" required>
+ <span class="form-error">End date is required</span>
+ </div>
+ </div>
+ <div class="form-field">
+ <label class="form-label required">Purpose of Certificate</label>
+ <select class="form-select" name="purpose" required>
+ <option value="">-- Select Purpose --</option>
+ <option value="employment">Employment / Job Application</option>
+ <option value="higher-studies">Higher Studies / University Admission</option>
+ <option value="visa">Visa / Immigration Application</option>
+ <option value="scholarship">Scholarship Application</option>
+ <option value="government">Government Service Application</option>
+ <option value="other">Other (Please Specify)</option>
+ </select>
+ <span class="form-error">Purpose is required</span>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Additional Information (Optional)</label>
+ <textarea class="form-textarea" name="additionalInfo" placeholder="Any specific requirements or additional information..."></textarea>
+ </div>
+ </div>
+ `
+ };
+
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ // 3âƒ£ HANDLE DOCUMENT TYPE CHANGE
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ document.getElementById('docType').addEventListener('change', function () {
+ const docType = this.value;
+ const container = document.getElementById('dynamicFieldsContainer');
+ const uploadSection = document.getElementById('uploadSection');
+ const declarationSection = document.getElementById('declarationSection');
+
+ // Clear previous fields
+ container.innerHTML = '';
+
+ if (docType && documentTemplates[docType]) {
+ // Insert template
+ container.innerHTML = documentTemplates[docType];
+
+ // Show common sections
+ uploadSection.style.display = 'block';
+ declarationSection.style.display = 'block';
+ } else {
+ // Hide common sections
+ uploadSection.style.display = 'none';
+ declarationSection.style.display = 'none';
+ }
+ });
+
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ // 4âƒ£ FORM VALIDATION
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ function validateForm() {
+ let isValid = true;
+ const form = document.getElementById('applicationForm');
+
+ // Check document type
+ const docType = document.getElementById('docType');
+ if (!docType.value) {
+ docType.closest('.form-field').classList.add('error');
+ isValid = false;
+ } else {
+ docType.closest('.form-field').classList.remove('error');
+ }
+
+ // Check all required fields in dynamic section
+ const requiredFields = form.querySelectorAll('[required]');
+ requiredFields.forEach(field => {
+ if (!field.value || (field.type === 'checkbox' && !field.checked)) {
+ field.closest('.form-field')?.classList.add('error');
+ isValid = false;
+ } else {
+ field.closest('.form-field')?.classList.remove('error');
+ }
+ });
+
+ // File validation
+ const fileInputs = form.querySelectorAll('input[type="file"]');
+ fileInputs.forEach(input => {
+ if (input.files.length > 0) {
+ Array.from(input.files).forEach(file => {
+ if (file.size > 5 * 1024 * 1024) { // 5MB
+ alert(`File "${file.name}" exceeds 5MB limit. Please upload a smaller file.`);
+ isValid = false;
+ }
+ });
+ }
+ });
+
+ return isValid;
+ }
+
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ // 5âƒ£ FORM SUBMISSION
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ document.getElementById('applicationForm').addEventListener('submit', function (e) {
+ e.preventDefault();
+
+ if (!validateForm()) {
+ alert(' Please fill all required fields correctly');
+ // Scroll to first error
+ const firstError = document.querySelector('.form-field.error');
+ if (firstError) {
+ firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+ }
+ return;
+ }
+
+ // Generate Application ID
+ const appId = 'JDAPP' + new Date().getFullYear() + String(Math.floor(1000 + Math.random() * 9000));
+
+ // Collect form data
+ const formData = new FormData(this);
+ const docTypeSelect = document.getElementById('docType');
+ const docTypeName = docTypeSelect.options[docTypeSelect.selectedIndex].text;
+
+ const data = {
+ applicationId: appId,
+ timestamp: new Date().toISOString(),
+ status: 'Pending',
+ documentType: document.getElementById('docType').value,
+ documentTypeName: docTypeName,
+ student: {
+ name: document.getElementById('studentName').value,
+ rollNumber: document.getElementById('rollNumber').value,
+ btId: document.getElementById('btId').value,
+ department: document.getElementById('department').value,
+ email: document.getElementById('email').value,
+ mobile: document.getElementById('mobile').value
+ },
+ formData: Object.fromEntries(formData)
+ };
+
+ // Save to localStorage (mock backend)
+ const applications = JSON.parse(localStorage.getItem('applications') || '[]');
+ applications.push(data);
+ localStorage.setItem('applications', JSON.stringify(applications));
+
+ // Show success modal
+ document.getElementById('appIdDisplay').textContent = appId;
+ document.getElementById('successModal').classList.add('open');
+ });
+
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ // 6âƒ£ RESET FORM
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ function resetForm() {
+ if (confirm(' Are you sure you want to reset the form? All entered data will be lost.')) {
+ document.getElementById('applicationForm').reset();
+ document.getElementById('dynamicFieldsContainer').innerHTML = '';
+ document.getElementById('uploadSection').style.display = 'none';
+ document.getElementById('declarationSection').style.display = 'none';
+ document.querySelectorAll('.form-field').forEach(field => field.classList.remove('error'));
+ window.scrollTo({ top: 0, behavior: 'smooth' });
+ }
+ }
+
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ // 7âƒ£ CLOSE MODAL ON OUTSIDE CLICK
+ // â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+ document.getElementById('successModal').addEventListener('click', function (e) {
+ if (e.target === this) {
+ this.classList.remove('open');
+ window.location.href = 'dashboard.html';
+ }
+ });
+ </script>
+
+<script src="../js/header-info.js"></script>
+</body>
+
+</html>

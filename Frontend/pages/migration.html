@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Apply for Document â€“ JDCOEM Portal</title>
+ <link
+ href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+ rel="stylesheet">
+ <link rel="stylesheet" href="apply-document.css">
+</head>
+
+<body>
+
+ <!-- â”€â”€ HEADER â”€â”€ -->
+ <header class="site-header">
+ <div class="header-inner">
+ <div class="logo-wrap">
+ </div>
+ </div>
+ <div class="header-spacer"></div>
+ <a href="home.html" class="back-btn">â† Back to Home</a>
+ </div>
+ </header>
+
+ <!-- â”€â”€ MAIN â”€â”€ -->
+ <main class="main">
+
+ <!-- PAGE HEADER -->
+ <div class="page-header">
+ <h1> Apply for Document</h1>
+ <p>Submit your document request online. All fields marked with * are mandatory.</p>
+ </div>
+
+ <!-- FORM -->
+ <form id="applicationForm">
+
+ <!-- STUDENT DETAILS (READ-ONLY) -->
+ <div class="card">
+ <h2 class="card-title">Student Details</h2>
+ <div class="form-grid">
+ <div class="form-field">
+ <label class="form-label">Student Name</label>
+ <input type="text" class="form-input" id="studentName" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Roll Number</label>
+ <input type="text" class="form-input" id="rollNumber" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">BT / University ID</label>
+ <input type="text" class="form-input" id="btId" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Department</label>
+ <input type="text" class="form-input" id="department" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Programme</label>
+ <input type="text" class="form-input" id="programme" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Year / Semester</label>
+ <input type="text" class="form-input" id="yearSem" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">College Email</label>
+ <input type="email" class="form-input" id="email" readonly>
+ </div>
+ <div class="form-field">
+ <label class="form-label">Mobile Number</label>
+ <input type="tel" class="form-input" id="mobile" readonly>
+ </div>
+ </div>
+ </div>
+
+ <!-- DOCUMENT TYPE SELECTION -->
+ <div class="card">
+ <h2 class="card-title">Document Type</h2>
+ <div class="form-field">
+ <label class="form-label required">Select Document Type</label>
+ <select class="form-select" id="docType" required>
+ <option value="">-- Select Document --</option>
+ <option value="bonafide">Bonafide Certificate</option>
+ <option value="idcard">Identity Card</option>
+ <option value="hallticket">Hall / Exam Ticket</option>
+ <option value="tc">Transfer Certificate (TC)</option>
+ <option value="character">Character Certificate</option>
+ <option value="noc">No Objection Certificate (NOC)</option>
+ <option value="transcript">Transcript</option>
+ </select>
+ <span class="form-error">Please select a document type</span>
+ </div>
+ </div>
+
+ <!-- DYNAMIC FIELDS CONTAINER -->
+ <div id="dynamicFieldsContainer"></div>
+
+ <!-- COMMON UPLOAD SECTION -->
+ <div class="card" id="uploadSection" style="display:none;">
+ <h2 class="card-title">Supporting Documents</h2>
+ <div class="form-field">
+ <label class="form-label">Upload Supporting Documents (Optional)</label>
+ <input type="file" class="form-input form-file" id="supportingDocs" multiple accept=".pdf,.jpg,.jpeg,.png">
+ <span class="form-help">Accepted formats: PDF, JPG, PNG (Max 5MB per file)</span>
+ </div>
+ </div>
+
+ <!-- DECLARATION -->
+ <div id="declarationSection" style="display:none;">
+ <div class="checkbox-wrapper">
+ <input type="checkbox" id="declaration" required>
+ <label class="checkbox-label" for="declaration">
+ I hereby declare that the information provided above is true and correct to the best of my knowledge. I
+ understand that any false information may lead to rejection of my application or disciplinary action.
+ </label>
+ </div>
+
+ <!-- SUBMIT BUTTONS -->
+ <div class="btn-group">
+ <button type="submit" class="btn btn-primary" id="submitBtn">
+ <span></span> Submit Application
+ </button>
+ <button type="button" class="btn btn-secondary" onclick="resetForm()">
+ <span>â†»</span> Reset Form
+ </button>
+ </div>
+ </div>
+
+ </form>
+
+ </main>
+
+ <!-- SUCCESS MODAL -->
+ <div class="modal-overlay" id="successModal">
+ <div class="modal">
+ <h2>Application Submitted Successfully!</h2>
+ <p>Your document request has been received.</p>
+ <p class="app-id">Application ID: <span id="appIdDisplay"></span></p>
+ <p>You can track your application status using this ID.</p>
+ <button class="btn btn-primary" onclick="window.location.href='dashboard.html'">
+ View My Applications
+ </button>
+ </div>
+ </div>
+
+ <script src="/college-portal/public/js/apply-document.js"></script>
+<script src="../js/header-info.js"></script>
+</body>
+
+</html>

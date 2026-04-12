@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Apply â€“ Admission Letter | JDCOEM Portal</title>
+ <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="../css/variable.css">
+ <link rel="stylesheet" href="../css/reset.css">
+ <link rel="stylesheet" href="../css/layout.css">
+ <link rel="stylesheet" href="../css/admission.css">
+</head>
+<body>
+ <header class="site-header">
+ <div class="header-inner">
+ <div class="header-divider"></div>
+ <div class="header-spacer"></div>
+ <div class="user-chip">
+ <div class="user-avatar" id="userInitials">?</div>
+ <span class="user-name-text" id="userName">Loadingâ€¦</span>
+ </div>
+ <button class="logout-btn" onclick="logout()">Logout</button>
+ </div>
+ </header>
+
+ <div class="layout">
+ <aside class="sidebar">
+ <span class="nav-section-label">Main Menu</span>
+ <a class="nav-item" href="home.html">Dashboard</a>
+ <a class="nav-item active" href="documents.html">Apply for Document</a>
+ <a class="nav-item" href="dashboard.html">My Applications</a>
+ <a class="nav-item" href="track-status.html">Track Status</a>
+ <a class="nav-item" href="download.html">Downloads</a>
+ <span class="nav-section-label" style="margin-top:8px;">Account</span>
+ <a class="nav-item" href="profile.html">My Profile</a>
+ <a class="nav-item" href="notification.html">Notifications</a>
+ <a class="nav-item" href="#">Help & Support</a>
+ </aside>
+
+ <main class="main">
+ <div class="page-hero">
+ <div class="breadcrumb">
+ <a href="home.html">Home</a> <span class="sep">â€º</span>
+ <a href="documents.html">Documents</a> <span class="sep">â€º</span>
+ <span class="cur">Admission Letter</span>
+ </div>
+ <div class="hero-row">
+ <div class="hero-left">
+
+ <div class="hero-info">
+ <h1>Admission Letter Application</h1>
+ <p>Official letter confirming student details produced after admission.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <div class="stepper-wrap">
+ <div class="stepper">
+ <div class="step"><div class="step-circle active" id="sc1">1</div><div class="s-title active">Details</div></div>
+ <div class="step-line"></div>
+ <div class="step"><div class="step-circle pending" id="sc2">2</div><div class="s-title">Documents</div></div>
+ <div class="step-line"></div>
+ <div class="step"><div class="step-circle pending" id="sc3">3</div><div class="s-title">Submit</div></div>
+ </div>
+ </div>
+
+ <div class="content-area">
+ <div class="form-col">
+ <!-- STEP 1 -->
+ <div id="step1-content">
+ <div class="card">
+ <div class="card-head"><h3>Student Information</h3></div>
+ <div class="card-body">
+ <div class="form-grid">
+ <div class="field">
+ <label>Full Name <span class="req">*</span></label>
+ <input type="text" id="fullName">
+ </div>
+ <div class="field">
+ <label>Date of Birth <span class="req">*</span></label>
+ <input type="date" id="dob">
+ </div>
+ <div class="field">
+ <label>Gender <span class="req">*</span></label>
+ <select id="gender">
+ <option>Male</option><option>Female</option><option>Other</option>
+ </select>
+ </div>
+ <div class="field">
+ <label>Aadhaar Number <span class="req">*</span></label>
+ <input type="text" id="aadhaar">
+ </div>
+ <div class="field">
+ <label>Mobile Number <span class="req">*</span></label>
+ <input type="tel" id="mobile">
+ </div>
+ <div class="field">
+ <label>Email Address <span class="req">*</span></label>
+ <input type="email" id="email">
+ </div>
+ <div class="field">
+ <label>BTID / Student ID <span class="req">*</span></label>
+ <input type="text" id="btid">
+ </div>
+ <div class="field">
+ <label>Branch / Department <span class="req">*</span></label>
+ <select id="branch">
+ <option value="">Select Department</option>
+ <option>Computer Science and Engineering</option>
+ <option>Artificial Intelligence</option>
+ <option>Cyber Security</option>
+ <option>Information Technology</option>
+ <option>Data Science</option>
+ <option>Mechanical Engineering</option>
+ <option>Civil Engineering</option>
+ <option>Electrical Engineering</option>
+ <option>Electronics & Telecommunication</option>
+ <option>Chemical Engineering</option>
+ <option>MBA</option>
+ <option>MCA</option>
+ </select>
+ </div>
+ <div class="field">
+ <label>Current Year <span class="req">*</span></label>
+ <select id="year">
+ <option>First Year (FY)</option><option>Second Year (SY)</option>
+ <option>Third Year (TY)</option><option>Fourth Year (Final Year)</option>
+ </select>
+ </div>
+ <div class="field" style="grid-column:1/-1;">
+ <label>Purpose <span class="req">*</span></label>
+ <textarea id="remarks"></textarea>
+ </div>
+ </div>
+ </div>
+ </div>
+ <button class="btn btn-primary" onclick="goStep(2)">Next Step</button>
+ </div>
+
+ <!-- STEP 2 (HIDDEN) -->
+ <div id="step2-content" style="display:none;">
+ <div class="card">
+ <div class="card-head"><h3>Upload Documents</h3></div>
+ <div class="card-body">
+ <div class="upload-item" id="ui-photo">
+ <input type="file" class="file-input" onchange="markUploaded('ui-photo',this)">
+ <div class="ui-info">Photo</div>
+ <button onclick="triggerUpload('ui-photo',event)">Upload</button>
+ </div>
+ <div class="upload-item" id="ui-id">
+ <input type="file" class="file-input" onchange="markUploaded('ui-id',this)">
+ <div class="ui-info">ID Card</div>
+ <button onclick="triggerUpload('ui-id',event)">Upload</button>
+ </div>
+ </div>
+ </div>
+ <button onclick="goStep(1)">Back</button>
+ <button onclick="goStep(3)">Next Step</button>
+ </div>
+
+ <!-- STEP 3 (HIDDEN) -->
+ <div id="step3-content" style="display:none;">
+ <div class="card">
+ <div class="card-head"><h3>Review</h3></div>
+ <div class="card-body" id="review-area"></div>
+ </div>
+ <button onclick="goStep(2)">Back</button>
+ <button onclick="submitApplication()">Submit</button>
+ </div>
+ </div>
+ </div>
+ </main>
+ </div>
+
+ <script src="../js/admission.js"></script>
+ <script>
+ // Simple logic for admission page steps
+ function goStep(n) {
+ document.getElementById('step1-content').style.display = n==1?'block':'none';
+ document.getElementById('step2-content').style.display = n==2?'block':'none';
+ document.getElementById('step3-content').style.display = n==3?'block':'none';
+ document.querySelectorAll('.step-circle').forEach((c,i)=> {
+ c.className = 'step-circle ' + (i+1==n?'active':(i+1<n?'done':'pending'));
+ });
+ }
+ function triggerUpload(id,e) {
+ e.preventDefault();
+ document.querySelector('#'+id+' .file-input').click();
+ }
+ function markUploaded(id,input) {
+ if(input.files.length) document.getElementById(id).style.background='#d1fae5';
+ }
+ </script>
+<script src="../js/header-info.js"></script>
+</body>
+</html>

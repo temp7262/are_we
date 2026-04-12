@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Application Status â€“ JDCOEM Portal</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/track-status.css">
+</head>
+
+<body>
+
+  <!-- â”€â”€ HEADER â”€â”€ -->
+  <header class="hdr">
+    <div class="hdr-inner">
+      
+      <div class="hdr-div"></div>
+      <div class="hdr-space"></div>
+      <a href="profile.html" class="profile-link">
+        <div class="user-chip">
+          <div class="u-av" id="uAv">?</div>
+          <div class="u-name" id="uName">Loadingâ€¦</div>
+        </div>
+      </a>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+
+    <!-- â”€â”€ SIDEBAR â”€â”€ -->
+    <aside class="sidebar">
+      <span class="nav-lbl">Main Menu</span>
+      <a class="nav-a" href="home.html">Dashboard</a>
+      <a class="nav-a" href="documents.html">Apply for Document</a>
+      <a class="nav-a" href="dashboard.html">My Applications <span class="nav-chip" id="sideChip">0</span></a>
+      <a class="nav-a active" href="track-status.html">Track Status</a>
+      <a class="nav-a" href="download.html">Downloads</a>
+      <span class="nav-lbl" style="margin-top:10px;">Account</span>
+      <a class="nav-a" href="profile.html">My Profile</a>
+      <a class="nav-a" href="notification.html">Notifications</a>
+      <a class="nav-a" href="help.html">Help &amp; Support</a>
+    </aside>
+
+    <!-- â”€â”€ MAIN â”€â”€ -->
+    <main class="main">
+
+      <!-- PAGE HERO -->
+      <div class="page-hero">
+        <div class="crumb">
+          <a href="home.html">Home</a><span class="sep">â€º</span>
+          <a href="dashboard.html">My Applications</a><span class="sep">â€º</span>
+          <span class="cur">Track Status</span>
+        </div>
+        <div class="hero-row">
+          <div class="hero-left">
+            <h1>Track Application Status</h1>
+            <p>Track the progress of your document request in real time.</p>
+          </div>
+        </div>
+
+        <!-- LOOKUP STRIP -->
+        <div class="lookup-strip">
+          <input class="lookup-input" id="lookupInput" type="text"
+            placeholder="Enter Application ID (e.g. APP-2026-000045)" oninput="onLookupInput()"
+            onkeydown="if(event.key==='Enter') handleLookup()">
+          <button class="lookup-btn" onclick="handleLookup()">Track</button>
+          <div class="lookup-hint">Or select from your recent applications below</div>
+          <div id="quickPicks" style="display:flex;gap:8px;flex-wrap:wrap;width:100%;margin-top:6px;"></div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <!-- ALERT BANNER -->
+        <div id="alertBanner" class="alert-banner ab-info fu" style="display:none;">
+          <div class="ab-body"><strong id="abTitle">â€”</strong>
+            <p id="abMsg">â€”</p>
+          </div>
+        </div>
+
+        <!-- PROGRESS TRACKER -->
+        <div class="tracker-card fu fd2" id="trackerCard" style="display:none;">
+          <div class="tc-head">
+            <h3>Application Progress</h3>
+          </div>
+          <div class="tc-body">
+            <div class="prog-steps" id="progSteps">
+              <div class="prog-fill" id="progFill" style="width:0%;"></div>
+            </div>
+            <div class="timeline-vert" id="timelineVert"></div>
+          </div>
+        </div>
+
+        <!-- CURRENT STATUS SUMMARY -->
+        <div class="status-summary-card fu fd3" id="statusSummaryCard" style="display:none;">
+          <div class="ss-head">
+            <h3>Current Status Summary</h3>
+          </div>
+          <div class="ss-body">
+            <div class="ss-field">
+              <div class="ss-label">Current Status</div>
+              <div class="ss-val" id="ssCurStatus">â€”</div>
+            </div>
+            <div class="ss-field">
+              <div class="ss-label">Last Updated</div>
+              <div class="ss-val"><span id="ssUpdated">â€”</span></div>
+            </div>
+            <div class="ss-field">
+              <div class="ss-label">Responsible Authority</div>
+              <div class="ss-val"><span id="ssAuthority">â€”</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REMARKS -->
+        <div class="remarks-card fu fd3" id="remarksCard" style="display:none;">
+          <div class="rk-head">
+            <h3>Remarks &amp; Notes</h3>
+          </div>
+          <div class="rk-body" id="remarksBody">â€”</div>
+        </div>
+
+
+
+        <!-- ACTION BUTTONS -->
+        <div class="actions-card fu fd4" id="actionsCard" style="display:none;">
+          <h3>Actions</h3>
+          <div class="actions-row" id="actionsRow">â€”</div>
+        </div>
+
+        <!-- HELP & SUPPORT -->
+        <div class="help-card fu fd5">
+          <div class="help-head">
+            <h3>Help &amp; Support</h3>
+          </div>
+          <div class="help-body">
+            <div class="help-item">
+              <div class="hi-icon" style="background:#dbeafe;"></div>
+              <div>
+                <div class="hi-label">Office Phone</div>
+                <div class="hi-val">9011010038</div>
+                <div class="hi-sub">Monâ€“Sat Â· 9 AM â€“ 5:30 PM</div>
+              </div>
+            </div>
+            <div class="help-item">
+              <div class="hi-icon" style="background:#d1fae5;"></div>
+              <div>
+                <div class="hi-label">Helpdesk Email</div>
+                <div class="hi-val"><a href="mailto:support@jdcoem.ac.in">support@jdcoem.ac.in</a></div>
+                <div class="hi-sub">Response within 1 working day</div>
+              </div>
+            </div>
+            <div class="help-item">
+              <div class="hi-icon" style="background:#fef9c3;"></div>
+              <div>
+                <div class="hi-label">Office Location</div>
+                <div class="hi-val">Admin Block â€“ Room 101</div>
+                <div class="hi-sub">Kalmeshwar Road, Nagpur</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </main>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- â”€â”€ FOOTER â”€â”€ -->
+  <footer class="site-footer">
+    <div class="f-grid">
+      <div>
+        <div class="f-title">JD College of Engineering and Management</div>
+        <div class="f-text">Khandala, Post: Valni, Near Hanuman Temple,<br>Borgoan Phata, Kalmeshwar Road, Nagpur â€“
+          441501<br>9011010038 &nbsp;|&nbsp; Fax: (0712) 2023003</div>
+      </div>
+      <div>
+        <div class="f-title">Quick Links</div>
+        <div class="f-text">
+          <a href="home.html">Dashboard</a><br>
+          <a href="documents.html">Apply for Document</a><br>
+          <a href="dashboard.html">My Applications</a><br>
+          <a href="profile.html">My Profile</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-title">Contact</div>
+        <div class="f-text">
+          Email: <a href="mailto:info@jdcoem.ac.in">info@jdcoem.ac.in</a><br>
+          Email: <a href="mailto:support@jdcoem.ac.in">support@jdcoem.ac.in</a>
+        </div>
+      </div>
+    </div>
+    <div class="f-bottom">&copy; 2025 JD College of Engineering and Management &nbsp;|&nbsp; Student Digital Document
+      Services Portal</div>
+  </footer>
+
+  <script src="../js/track-status.js"></script>
+<script src="../js/header-info.js"></script>
+</body>
+
+</html>

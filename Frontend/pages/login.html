@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JDCOEM – Digital Document Services Portal</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/layout.css">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+
+  <!-- TOP STRIP -->
+  <div class="top-strip"></div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="college-text">
+        <h1>DigiSecure</h1>
+      </div>
+      <div class="header-right">
+        <strong>Digital Document Services</strong>
+      </div>
+    </div>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-bar">
+    Home &rsaquo; <span>Student Login / Register</span>
+  </div>
+
+  <!-- MAIN -->
+  <main style="background:var(--cream); flex:1;">
+    <div class="page-main">
+
+      <!-- ══ DOCUMENT VERIFICATION PANEL (left) ══ -->
+      <div class="verify-panel">
+
+        <div class="vp-header">
+          <div class="vp-header-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg>
+          </div>
+          <div>
+            <h2>Document Verification</h2>
+            <p>Instantly verify the authenticity of any DigiSecure-issued document</p>
+          </div>
+        </div>
+
+        <!-- Drop Zone -->
+        <div class="vp-dropzone" id="vpDropzone" ondragover="vpDragOver(event)" ondragleave="vpDragLeave(event)"
+          ondrop="vpDrop(event)">
+          <div class="vp-dz-inner" id="vpDzInner">
+            <div class="vp-dz-icon">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="17 8 12 3 7 8" />
+                <line x1="12" y1="3" x2="12" y2="15" />
+              </svg>
+            </div>
+            <div class="vp-dz-text"><strong>Click to upload</strong> or drag &amp; drop</div>
+            <div class="vp-format-tags">
+              <span class="vp-fmt">PDF</span>
+            </div>
+          </div>
+          <div class="vp-file-preview" id="vpFilePreview" style="display:none;">
+            <div class="vpf-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+            </div>
+            <div class="vpf-info">
+              <div class="vpf-name" id="vpFileName">—</div>
+              <div class="vpf-size" id="vpFileSize">—</div>
+            </div>
+            <button class="vpf-remove" onclick="vpClearFile(event)" title="Remove">✕</button>
+          </div>
+          <input type="file" id="vpFileInput" accept=".pdf" onchange="vpFileSelected(this)" style="display:none;">
+        </div>
+
+        <div class="vp-result" id="vpResult" style="display:none;"></div>
+
+        <button class="vp-btn" id="vpVerifyBtn" onclick="vpVerify()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+          Verify Document
+        </button>
+
+        <div class="vp-footer-note">
+          Verification is instant and does not store your document.
+        </div>
+
+      </div>
+      <!-- ══ END VERIFY PANEL ══ -->
+
+      <!-- Auth Card — IDENTICAL to original, zero changes -->
+      <div class="auth-card">
+
+        <!-- Card Header -->
+        <div class="card-header">
+          <div class="card-header-text">
+            <h2>Student Login Portal</h2>
+            <p>Secure access to Document Services</p>
+          </div>
+        </div>
+
+        <!-- Tab Buttons -->
+        <div class="tab-switcher">
+          <button class="tab-btn active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+          <button class="tab-btn" id="tab-register" onclick="switchTab('register')">New Registration</button>
+        </div>
+
+        <!-- LOGIN PANEL -->
+        <div id="panel-login" class="form-panel" style="display:block;">
+
+          <div class="alert alert-error" id="login-error"></div>
+          <div class="alert alert-success" id="login-success"></div>
+
+          <div class="form-note">
+            <strong>Students Only</strong>
+            Use your college <strong>@jdcoem.ac.in</strong> email ID and registered password.
+            First-time users must
+            <a href="javascript:void(0)" onclick="switchTab('register')" style="color:var(--saffron);">register
+              here</a>.
+          </div>
+
+          <form id="form-login" onsubmit="handleLogin(event)" autocomplete="on" novalidate>
+
+            <div class="form-row">
+              <label for="login-btid">College Email ID <span class="req">*</span></label>
+              <div class="input-wrap">
+                <input type="email" id="login-btid" name="email" placeholder="btid@jdcoem.ac.in" autocomplete="username"
+                  required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="login-password">Password <span class="req">*</span></label>
+              <div class="input-wrap pw-wrap">
+                <input type="password" id="login-password" name="password" placeholder="Enter your password"
+                  autocomplete="current-password" required>
+                <button class="eye-btn" type="button" onclick="togglePassword('login-password', this)"></button>
+              </div>
+              <a href="javascript:void(0)" class="forgot-link" onclick="showForgotAlert()">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="submit-btn" id="login-btn">Sign In</button>
+
+          </form>
+
+          <div class="divider">or</div>
+          <div style="text-align:center; font-size:13px; color:var(--gray-500);">
+            New student?
+            <a href="javascript:void(0)" onclick="switchTab('register')"
+              style="color:var(--saffron); font-weight:600;">Register here</a>
+          </div>
+        </div>
+
+        <!-- REGISTER PANEL -->
+        <div id="panel-register" class="form-panel" style="display:none;">
+
+          <div class="alert alert-error" id="reg-error"></div>
+          <div class="alert alert-success" id="reg-success"></div>
+
+          <div class="form-note">
+            <strong>Registration Instructions</strong>
+            Use exact details as per college records. Only <strong>@jdcoem.ac.in</strong> email IDs are
+            accepted.
+          </div>
+
+          <form id="form-register" onsubmit="handleRegister(event)" autocomplete="on" novalidate>
+
+            <div class="form-row-half">
+              <div>
+                <label for="reg-fname">First Name <span class="req">*</span></label>
+                <div class="input-wrap">
+                  <input type="text" id="reg-fname" name="fname" placeholder="First name" autocomplete="given-name">
+                </div>
+              </div>
+              <div>
+                <label for="reg-lname">Last Name <span class="req">*</span></label>
+                <input type="text" id="reg-lname" name="lname" placeholder="Last name" autocomplete="family-name">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="reg-btid">BT ID / Student ID <span class="req">*</span></label>
+              <div class="input-wrap">
+                <input type="text" id="reg-btid" name="bt_id" placeholder="e.g. BT22CS001" maxlength="20"
+                  autocomplete="off">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="reg-email">College Email ID <span class="req">*</span></label>
+              <div class="input-wrap">
+                <input type="email" id="reg-email" name="email" placeholder="btid@jdcoem.ac.in" autocomplete="email">
+              </div>
+            </div>
+
+            <div class="form-row-half">
+              <div>
+                <label for="reg-branch">Branch <span class="req">*</span></label>
+                <select id="reg-branch" name="branch">
+                  <option value="">Select Department</option>
+                  <option>Computer Science and Engineering</option>
+                  <option>Artificial Intelligence</option>
+                  <option>Cyber Security</option>
+                  <option>Information Technology</option>
+                  <option>Data Science</option>
+                  <option>Mechanical Engineering</option>
+                  <option>Civil Engineering</option>
+                  <option>Electrical Engineering</option>
+                  <option>Electronics &amp; Telecommunication</option>
+                  <option>Chemical Engineering</option>
+                  <option>MBA</option>
+                  <option>MCA</option>
+                </select>
+              </div>
+              <div>
+                <label for="reg-year">Current Year <span class="req">*</span></label>
+                <select id="reg-year" name="year">
+                  <option value="">Select Year</option>
+                  <option>First Year (FE)</option>
+                  <option>Second Year (SE)</option>
+                  <option>Third Year (TE)</option>
+                  <option>Final Year (BE)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="reg-mobile">Mobile Number <span class="req">*</span></label>
+              <div class="input-wrap">
+                <input type="tel" id="reg-mobile" name="mobile" placeholder="10-digit mobile number" maxlength="10"
+                  autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="reg-password">Create Password <span class="req">*</span></label>
+              <div class="input-wrap pw-wrap">
+                <input type="password" id="reg-password" name="password" placeholder="Minimum 8 characters"
+                  autocomplete="new-password" oninput="checkStrength(this.value)">
+                <button class="eye-btn" type="button" onclick="togglePassword('reg-password', this)"></button>
+              </div>
+              <div class="strength">
+                <div class="strength-bar">
+                  <div class="strength-fill" id="strength-fill"></div>
+                </div>
+                <div class="strength-label" id="strength-label">Strength: –</div>
+              </div>
+              <div class="show-row">
+                <input type="checkbox" id="show-reg-pass" onchange="togglePasswordCheckbox('reg-password', this)">
+                <label for="show-reg-pass">Show Password</label>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="reg-confirm">Confirm Password <span class="req">*</span></label>
+              <div class="input-wrap pw-wrap">
+                <input type="password" id="reg-confirm" name="confirm_password" placeholder="Re-enter password"
+                  autocomplete="new-password">
+                <button class="eye-btn" type="button" onclick="togglePassword('reg-confirm', this)"></button>
+              </div>
+              <div class="show-row">
+                <input type="checkbox" id="show-confirm-pass" onchange="togglePasswordCheckbox('reg-confirm', this)">
+                <label for="show-confirm-pass">Show Password</label>
+              </div>
+            </div>
+
+            <div class="terms-row">
+              <input type="checkbox" id="terms-check" name="terms">
+              <label for="terms-check">
+                I agree to the <a href="#">Terms of Use</a> and
+                <a href="#">Privacy Policy</a> of JDCOEM Digital Document Services Portal.
+              </label>
+            </div>
+
+            <button type="submit" class="submit-btn" id="reg-btn">Create Account</button>
+
+          </form>
+
+          <div class="divider">or</div>
+          <div style="text-align:center; font-size:13px; color:var(--gray-500);">
+            Already registered?
+            <a href="javascript:void(0)" onclick="switchTab('login')"
+              style="color:var(--saffron); font-weight:600;">Sign in here</a>
+          </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="card-footer">This portal uses SSL encryption. Your data is secure.</div>
+
+      </div><!-- /.auth-card -->
+
+    </div><!-- /.page-main -->
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-grid" style="grid-template-columns:1fr;max-width:900px;margin:0 auto;">
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="home.html">Dashboard</a></li>
+          <li><a href="documents.html">Apply for Document</a></li>
+          <li><a href="dashboard.html">My Applications</a></li>
+          <li><a href="track-status.html">Track Application</a></li>
+          <li><a href="download.html">Download Documents</a></li>
+          <li><a href="profile.html">My Profile</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Student Digital Document Services Portal. All Rights Reserved.</div>
+  </footer>
+
+  <!-- login.js — COMPLETELY UNCHANGED -->
+  <script src="../js/login.js"></script>
+
+  <!-- Verify panel logic — self-contained, no overlap with login.js -->
+  <script>
+    var vpFile = null;
+
+    function vpDragOver(e) {
+      e.preventDefault();
+      document.getElementById('vpDropzone').classList.add('drag-over');
+    }
+    function vpDragLeave() {
+      document.getElementById('vpDropzone').classList.remove('drag-over');
+    }
+    function vpDrop(e) {
+      e.preventDefault();
+      document.getElementById('vpDropzone').classList.remove('drag-over');
+      var files = e.dataTransfer.files;
+      if (files && files[0]) vpSetFile(files[0]);
+    }
+
+    document.getElementById('vpDropzone').addEventListener('click', function (e) {
+      if (!e.target.closest('.vpf-remove')) document.getElementById('vpFileInput').click();
+    });
+
+    function vpFileSelected(input) {
+      if (input.files && input.files[0]) vpSetFile(input.files[0]);
+    }
+
+    function vpSetFile(file) {
+      if (file.type !== 'application/pdf') {
+        vpShowResult('error', '⚠️ Only PDF files are accepted.');
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        vpShowResult('error', '⚠️ File exceeds 10 MB limit.');
+        return;
+      }
+      vpFile = file;
+      document.getElementById('vpDzInner').style.display = 'none';
+      document.getElementById('vpFilePreview').style.display = 'flex';
+      document.getElementById('vpFileName').textContent = file.name;
+      document.getElementById('vpFileSize').textContent = (file.size / 1024).toFixed(1) + ' KB';
+      document.getElementById('vpResult').style.display = 'none';
+    }
+
+    function vpClearFile(e) {
+      e.stopPropagation();
+      vpFile = null;
+      document.getElementById('vpFileInput').value = '';
+      document.getElementById('vpDzInner').style.display = '';
+      document.getElementById('vpFilePreview').style.display = 'none';
+      document.getElementById('vpResult').style.display = 'none';
+    }
+
+    function vpVerify() {
+      if (!vpFile) {
+        vpShowResult('error', '⚠️ Please upload a document first.');
+        return;
+      }
+      var btn = document.getElementById('vpVerifyBtn');
+      btn.disabled = true;
+      btn.innerHTML = 'Preparing file…';
+
+      // Read file as base64 so verify.html can reconstruct it after navigation
+      var reader = new FileReader();
+      reader.onload = function () {
+        try {
+          sessionStorage.setItem('vpPendingFile', JSON.stringify({
+            name: vpFile.name,
+            size: vpFile.size,
+            type: vpFile.type,
+            data: reader.result  // data:application/pdf;base64,...
+          }));
+          window.location.href = '../verify.html';
+        } catch (e) {
+          btn.disabled = false;
+          btn.innerHTML = 'Verify Document';
+          vpShowResult('error', '⚠️ File too large to transfer. Please use the verification page directly.');
+        }
+      };
+      reader.onerror = function () {
+        btn.disabled = false;
+        btn.innerHTML = 'Verify Document';
+        vpShowResult('error', '⚠️ Could not read file. Please try again.');
+      };
+      reader.readAsDataURL(vpFile);
+    }
+
+    function vpShowResult(type, html) {
+      var el = document.getElementById('vpResult');
+      el.className = 'vp-result vp-result-' + type;
+      el.innerHTML = html;
+      el.style.display = 'block';
+    }
+  </script>
+
+</body>
+
+</html>

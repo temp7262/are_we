@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile – JDCOEM Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header class="hdr">
+    <div class="hdr-inner">
+      
+      <div class="hdr-div"></div>
+      <div class="hdr-space"></div>
+      <a href="profile.html" class="profile-link">
+        <div class="user-chip">
+          <div class="u-av" id="hdrInitials">?</div>
+          <div class="u-name" id="hdrName">Loading…</div>
+        </div>
+      </a>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+      <span class="nav-lbl">Main Menu</span>
+      <a class="nav-a" href="home.html">Dashboard</a>
+      <a class="nav-a" href="documents.html">Apply for Document</a>
+      <a class="nav-a" href="dashboard.html">My Applications <span class="nav-chip" id="sideAppBadge"></span></a>
+      <a class="nav-a" href="track-status.html">Track Status</a>
+      <a class="nav-a" href="download.html">Downloads</a>
+      <span class="nav-lbl" style="margin-top:10px;">Account</span>
+      <a class="nav-a active" href="profile.html">My Profile</a>
+      <a class="nav-a" href="notification.html">Notifications</a>
+      <a class="nav-a" href="help.html">Help &amp; Support</a>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="main">
+
+      <!-- BREADCRUMB -->
+      <div class="breadcrumb">
+        <a href="home.html">Home</a>
+        <span class="sep">›</span>
+        <span class="cur">My Profile</span>
+      </div>
+
+      <!-- PROFILE COMPLETION BANNER -->
+      <div class="readonly-note" id="profile-completion-banner" style="display:none; margin-bottom:16px; background:#fffbeb; border-color:#fcd34d; color:#92400e;">
+        <span id="completion-msg">Complete your profile to apply for documents.</span>
+      </div>
+
+      <!-- ① PROFILE HEADER CARD -->
+      <div class="profile-header-card fu">
+        <div class="ph-cover"></div>
+        <div class="ph-body">
+          <div class="ph-avatar-wrap">
+            <div class="ph-avatar" id="phAvatar">
+              <span id="phInitials">?</span>
+              <label class="avatar-edit-btn" title="Upload photo">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                <input type="file" accept="image/*" onchange="previewAvatar(this)" style="display:none;">
+              </label>
+            </div>
+          </div>
+          <div class="ph-info">
+            <div class="ph-name" id="phName">Loading…</div>
+            <div class="ph-meta">
+              <span class="ph-pill"><span id="phBtid">—</span></span>
+              <span class="ph-status active">Active Student</span>
+            </div>
+            <div class="ph-sub" id="phSub">JD College of Engineering and Management, Nagpur</div>
+          </div>
+          <div class="ph-actions">
+            <button class="btn-outline-sm" onclick="window.location.href='documents.html'">Apply Document</button>
+            <button class="btn-outline-sm" onclick="window.location.href='dashboard.html'">My Applications</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ② APP SUMMARY STRIP -->
+      <div class="app-strip fu fu1">
+        <a class="app-stat-card" href="dashboard.html">
+          <div class="asc-num" id="totalApps">—</div>
+          <div class="asc-label">Total Applications</div>
+        </a>
+        <a class="app-stat-card" href="dashboard.html">
+          <div class="asc-num pending" id="pendingApps">—</div>
+          <div class="asc-label">Pending</div>
+        </a>
+        <a class="app-stat-card" href="dashboard.html">
+          <div class="asc-num approved" id="approvedApps">—</div>
+          <div class="asc-label">Approved</div>
+        </a>
+        <a class="app-stat-card" href="dashboard.html">
+          <div class="asc-num rejected" id="rejectedApps">—</div>
+          <div class="asc-label">Rejected</div>
+        </a>
+      </div>
+
+      <!-- ③ TWO-COLUMN LAYOUT -->
+      <div class="two-col">
+
+        <!-- ═══ LEFT COLUMN ═══ -->
+        <div class="left-col">
+
+          <!-- PERSONAL INFORMATION -->
+          <div class="section-card fu fu2" id="sec-personal">
+            <div class="sc-header">
+              <svg class="sc-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <h3>Personal Information</h3>
+              <button class="edit-toggle-btn" id="editPersonalBtn" onclick="toggleEdit('personal')">Edit</button>
+            </div>
+            <div class="sc-body">
+              <div class="readonly-note" id="college-maintained-notice">
+                All fields are editable. Click "Edit" to update your information.
+              </div>
+              <div class="fields-grid">
+                <!-- Full Name -->
+                <div class="field-item">
+                  <div class="fi-label">Full Name <span class="editable-badge">Editable</span></div>
+                  <div class="fi-value" id="disp-fullname">—</div>
+                  <input class="fi-input hidden" type="text" id="inp-fullname" placeholder="Full Name">
+                </div>
+                <!-- DOB -->
+                <div class="field-item">
+                  <div class="fi-label">Date of Birth <span class="editable-badge">Editable</span></div>
+                  <div class="fi-value" id="disp-dob">—</div>
+                  <input class="fi-input hidden" type="date" id="inp-dob">
+                </div>
+                <!-- Gender -->
+                <div class="field-item">
+                  <div class="fi-label">Gender <span class="editable-badge">Editable</span></div>
+                  <div class="fi-value" id="disp-gender">—</div>
+                  <select class="fi-input hidden" id="inp-gender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <!-- Email -->
+                <div class="field-item">
+                  <div class="fi-label">College Email ID <span class="editable-badge">Editable</span></div>
+                  <div class="fi-value" id="disp-email">—</div>
+                  <input class="fi-input hidden" type="email" id="inp-email" placeholder="Email">
+                </div>
+                <!-- Mobile -->
+                <div class="field-item">
+                  <div class="fi-label">Mobile Number <span class="editable-badge">Editable</span></div>
+                  <div class="fi-value" id="disp-mobile">—</div>
+                  <input class="fi-input hidden" type="tel" id="inp-mobile" placeholder="10-digit number" maxlength="10">
+                </div>
+                <!-- Address -->
+                <div class="field-item full-width">
+                  <div class="fi-label">Address <span class="editable-badge">Editable</span></div>
+                  <div class="fi-value" id="disp-address">—</div>
+                  <textarea class="fi-input hidden" id="inp-address" placeholder="Full residential address" rows="2"></textarea>
+                </div>
+              </div>
+              <div class="save-row hidden" id="save-personal">
+                <button class="btn-save" onclick="savePersonal()">Save Changes</button>
+                <button class="btn-cancel" onclick="cancelEdit('personal')">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACADEMIC INFORMATION -->
+          <div class="section-card fu fu2">
+            <div class="sc-header">
+              <svg class="sc-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              <h3>Academic Information</h3>
+              <button class="edit-toggle-btn" id="editAcademicBtn" onclick="toggleEdit('academic')">Edit</button>
+            </div>
+            <div class="sc-body">
+              <div class="fields-grid">
+                <!-- Branch -->
+                <div class="field-item">
+                  <div class="fi-label">Department / Branch</div>
+                  <div class="fi-value" id="disp-branch">—</div>
+                  <select class="fi-input hidden" id="inp-branch">
+                    <option value="">Select Branch</option>
+                    <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                    <option value="Electronics and Telecommunication">Electronics and Telecommunication</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Artificial Intelligence and Data Science">Artificial Intelligence and Data Science</option>
+                  </select>
+                </div>
+                <!-- Programme -->
+                <div class="field-item">
+                  <div class="fi-label">Course / Programme</div>
+                  <div class="fi-value" id="disp-programme">—</div>
+                  <select class="fi-input hidden" id="inp-programme">
+                    <option value="">Select Programme</option>
+                    <option value="Bachelor of Engineering (B.E.)">B.E. (Bachelor of Engineering)</option>
+                    <option value="Master of Engineering (M.E.)">M.E. (Master of Engineering)</option>
+                    <option value="Master of Business Administration (MBA)">MBA</option>
+                  </select>
+                </div>
+                <!-- Year -->
+                <div class="field-item">
+                  <div class="fi-label">Current Year</div>
+                  <div class="fi-value" id="disp-year">—</div>
+                  <select class="fi-input hidden" id="inp-year">
+                    <option value="">Select Year</option>
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                  </select>
+                </div>
+                <!-- Semester -->
+                <div class="field-item">
+                  <div class="fi-label">Current Semester</div>
+                  <div class="fi-value" id="disp-semester">—</div>
+                  <select class="fi-input hidden" id="inp-semester">
+                    <option value="">Select Semester</option>
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <option value="3">Semester 3</option>
+                    <option value="4">Semester 4</option>
+                    <option value="5">Semester 5</option>
+                    <option value="6">Semester 6</option>
+                    <option value="7">Semester 7</option>
+                    <option value="8">Semester 8</option>
+                  </select>
+                </div>
+                <!-- Admission Year -->
+                <div class="field-item">
+                  <div class="fi-label">Admission Year</div>
+                  <div class="fi-value" id="disp-adm-year">—</div>
+                  <input class="fi-input hidden" type="text" id="inp-adm-year" placeholder="e.g. 2023">
+                </div>
+                <!-- Section -->
+                <div class="field-item">
+                  <div class="fi-label">Section / Batch</div>
+                  <div class="fi-value" id="disp-section">—</div>
+                  <input class="fi-input hidden" type="text" id="inp-section" placeholder="e.g. A / B">
+                </div>
+                <!-- BT ID -->
+                <div class="field-item">
+                  <div class="fi-label">BT ID / Roll Number</div>
+                  <div class="fi-value" id="disp-btid2">—</div>
+                  <input class="fi-input hidden" type="text" id="inp-btid2" placeholder="e.g. BT00CS001">
+                </div>
+                <!-- PRN -->
+                <div class="field-item">
+                  <div class="fi-label">Enrollment / PRN No.</div>
+                  <div class="fi-value" id="disp-prn">—</div>
+                  <input class="fi-input hidden" type="text" id="inp-prn" placeholder="PRN Number">
+                </div>
+              </div>
+              <div class="save-row hidden" id="save-academic">
+                <button class="btn-save" onclick="saveAcademic()">Save Changes</button>
+                <button class="btn-cancel" onclick="cancelEdit('academic')">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- COLLEGE INFORMATION -->
+          <div class="section-card fu fu3">
+            <div class="sc-header">
+              <svg class="sc-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <h3>College Information</h3>
+              <button class="edit-toggle-btn" id="editCollegeBtn" onclick="toggleEdit('college')">Edit</button>
+            </div>
+            <div class="sc-body">
+              <div class="college-info-grid">
+                <div class="ci-row">
+                  <div class="ci-key">Institution</div>
+                  <div class="ci-val" id="disp-college-name">JD College of Engineering and Management</div>
+                  <input class="fi-input hidden" type="text" id="inp-college-name" style="flex:1;">
+                </div>
+                <div class="ci-row">
+                  <div class="ci-key">Status</div>
+                  <div class="ci-val" id="disp-college-status"><span class="status-tag auto">Autonomous Institute</span></div>
+                  <input class="fi-input hidden" type="text" id="inp-college-status" style="flex:1;">
+                </div>
+                <div class="ci-row">
+                  <div class="ci-key">University</div>
+                  <div class="ci-val" id="disp-college-univ">RTMNU</div>
+                  <input class="fi-input hidden" type="text" id="inp-college-univ" style="flex:1;">
+                </div>
+                <div class="ci-row">
+                  <div class="ci-key">City / State</div>
+                  <div class="ci-val" id="disp-college-city">Nagpur</div>
+                  <input class="fi-input hidden" type="text" id="inp-college-city" style="flex:1;">
+                </div>
+              </div>
+              <div class="save-row hidden" id="save-college">
+                <button class="btn-save" onclick="saveCollege()">Save Changes</button>
+                <button class="btn-cancel" onclick="cancelEdit('college')">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /left-col -->
+
+        <!-- ═══ RIGHT COLUMN ═══ -->
+        <div class="right-col">
+
+          <!-- SECURITY & ACCOUNT -->
+          <div class="section-card fu fu2">
+            <div class="sc-header">
+              <svg class="sc-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <h3>Security &amp; Account</h3>
+            </div>
+            <div class="sc-body" style="padding-top:4px;">
+              <div class="security-list">
+                <div class="sec-item" onclick="openModal('changePassword')">
+                  <div class="sec-item-left">
+                    <div class="sec-item-icon" style="background:#dbeafe;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <div>
+                      <div class="sec-item-title">Change Password</div>
+                      <div class="sec-item-sub">Update your login password</div>
+                    </div>
+                  </div>
+                  <span class="sec-arrow">›</span>
+                </div>
+                <div class="sec-item" onclick="toggleEdit('personal'); setTimeout(function(){ var m=document.getElementById('inp-mobile'); if(m) m.focus(); }, 200);">
+                  <div class="sec-item-left">
+                    <div class="sec-item-icon" style="background:#dcfce7;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.15 13.85 19.79 19.79 0 0 1 1.08 5.22 2 2 0 0 1 3.07 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 18z"/></svg>
+                    </div>
+                    <div>
+                      <div class="sec-item-title">Update Mobile Number</div>
+                      <div class="sec-item-sub">Change your registered phone</div>
+                    </div>
+                  </div>
+                  <span class="sec-arrow">›</span>
+                </div>
+                <div class="sec-item" onclick="confirmLogoutAll()">
+                  <div class="sec-item-left">
+                    <div class="sec-item-icon" style="background:#fee2e2;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    </div>
+                    <div>
+                      <div class="sec-item-title" style="color:var(--error);">Logout from All Devices</div>
+                      <div class="sec-item-sub">Terminate all active sessions</div>
+                    </div>
+                  </div>
+                  <span class="sec-arrow">›</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- KYC / UPLOADED DOCUMENTS -->
+          <div class="section-card fu fu3">
+            <div class="sc-header">
+              <svg class="sc-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <h3>Uploaded Documents</h3>
+              <span class="kyc-note">KYC</span>
+            </div>
+            <div class="sc-body" style="padding-top:4px;">
+              <div class="kyc-list">
+                <div class="kyc-item">
+                  <div class="kyc-icon" style="background:#dbeafe;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                  </div>
+                  <div class="kyc-text">
+                    <div class="kyc-name">College ID Card</div>
+                    <div class="kyc-sub">Issued by Admin Office</div>
+                  </div>
+                  <div class="kyc-right">
+                    <span class="kyc-status verified">Verified</span>
+                    <button class="kyc-view-btn">View</button>
+                  </div>
+                </div>
+                <div class="kyc-item">
+                  <div class="kyc-icon" style="background:#fef3c7;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  </div>
+                  <div class="kyc-text">
+                    <div class="kyc-name">Aadhaar Card</div>
+                    <div class="kyc-sub">Government Identity Proof</div>
+                  </div>
+                  <div class="kyc-right">
+                    <span class="kyc-status pending">Pending</span>
+                    <button class="kyc-view-btn" onclick="triggerUpload('aadhaar')">Upload</button>
+                    <input type="file" id="aadhaar-upload" accept=".pdf,.jpg,.png" style="display:none;" onchange="handleKycUpload(this,'aadhaar')">
+                  </div>
+                </div>
+                <div class="kyc-item">
+                  <div class="kyc-icon" style="background:#d1fae5;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                  </div>
+                  <div class="kyc-text">
+                    <div class="kyc-name">10th Marksheet</div>
+                    <div class="kyc-sub">SSC / Board Certificate</div>
+                  </div>
+                  <div class="kyc-right">
+                    <span class="kyc-status verified">Verified</span>
+                    <button class="kyc-view-btn">View</button>
+                  </div>
+                </div>
+                <div class="kyc-item">
+                  <div class="kyc-icon" style="background:#fef9c3;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#854d0e" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  </div>
+                  <div class="kyc-text">
+                    <div class="kyc-name">Passport Size Photo</div>
+                    <div class="kyc-sub">Recent white-background photo</div>
+                  </div>
+                  <div class="kyc-right">
+                    <span class="kyc-status pending">Pending</span>
+                    <button class="kyc-view-btn" onclick="triggerUpload('photo-kyc')">Upload</button>
+                    <input type="file" id="photo-kyc-upload" accept=".jpg,.jpeg,.png" style="display:none;" onchange="handleKycUpload(this,'photo-kyc')">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /right-col -->
+      </div><!-- /two-col -->
+
+    </main>
+  </div><!-- /page-wrap -->
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="f-grid">
+      <div>
+        <div class="f-title">JD College of Engineering and Management</div>
+        <div class="f-text">Khandala, Post: Valni, Near Hanuman Temple,<br>Borgoan Phata, Kalmeshwar Road, Nagpur – 441501<br>9011010038 &nbsp;|&nbsp; Fax: (0712) 2023003</div>
+      </div>
+      <div>
+        <div class="f-title">Quick Links</div>
+        <div class="f-text">
+          <a href="home.html">Dashboard</a><br>
+          <a href="documents.html">Apply for Document</a><br>
+          <a href="dashboard.html">My Applications</a><br>
+          <a href="track-status.html">Track Status</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-title">Contact</div>
+        <div class="f-text">
+          <a href="mailto:info@jdcoem.ac.in">info@jdcoem.ac.in</a><br>
+          <a href="mailto:support@jdcoem.ac.in">support@jdcoem.ac.in</a>
+        </div>
+      </div>
+    </div>
+    <div class="f-bottom">&copy; 2025 JD College of Engineering and Management &nbsp;|&nbsp; Student Digital Document Services Portal</div>
+  </footer>
+
+  <!-- CHANGE PASSWORD MODAL -->
+  <div class="modal-overlay" id="modal-changePassword">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Change Password</h3>
+        <button class="modal-close" onclick="closeModal('changePassword')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-field">
+          <label>Current Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="cur-pass" placeholder="Enter current password">
+            <button class="eye-btn" type="button" onclick="togglePw('cur-pass')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="modal-field">
+          <label>New Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="new-pass" placeholder="Min 8 characters" oninput="checkPwStrength(this.value)">
+            <button class="eye-btn" type="button" onclick="togglePw('new-pass')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <div class="pw-strength">
+            <div class="pw-bar"><div class="pw-fill" id="pw-fill"></div></div>
+            <span class="pw-label" id="pw-label">—</span>
+          </div>
+        </div>
+        <div class="modal-field">
+          <label>Confirm New Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" id="conf-pass" placeholder="Re-enter new password">
+            <button class="eye-btn" type="button" onclick="togglePw('conf-pass')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="modal-alert" id="pw-alert" style="display:none;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal-primary" onclick="changePassword()">Update Password</button>
+        <button class="btn-modal-sec" onclick="closeModal('changePassword')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="../js/profile.js"></script>
+  <script src="../js/header-info.js"></script>
+</body>
+</html>

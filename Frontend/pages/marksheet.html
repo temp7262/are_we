@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Mark Sheet Request â€“ JDCOEM Portal</title>
+ <link
+ href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+ rel="stylesheet">
+ <link rel="stylesheet" href="../css/bonafide.css">
+</head>
+
+<body>
+
+ <header class="site-header">
+ <div class="header-inner">
+ <div class="header-divider"></div>
+ <div class="header-spacer"></div>
+ <div class="user-chip">
+ <div class="user-avatar" id="userInitials">?</div>
+ <div>
+ <div class="user-name-text" id="userName">Loadingâ€¦</div>
+ <div class="user-id-text" id="userId"></div>
+ </div>
+ </div>
+ <button class="logout-btn" onclick="logout()"> Logout</button>
+ </div>
+ </header>
+
+ <div class="layout">
+ <aside class="sidebar">
+ <span class="nav-section-label">Main Menu</span>
+ <a class="nav-item" href="home.html">Dashboard</a>
+ <a class="nav-item active" href="documents.html">Apply for Document</a>
+ <a class="nav-item" href="dashboard.html">My Applications <span
+ class="nav-badge">0</span></a>
+ </aside>
+
+ <main class="main">
+ <div class="breadcrumb fu">
+ <a href="home.html"> Home</a>
+ <span class="sep">â€º</span>
+ <a href="documents.html">Documents</a>
+ <span class="sep">â€º</span>
+ <span class="current"> Mark Sheet Request</span>
+ </div>
+
+ <div class="doc-banner fu fu1">
+ <div class="banner-icon"></div>
+ <div class="banner-text">
+ <h2>Mark Sheet / Grade Card Request</h2>
+ <p>Request an official copy of your semester mark sheet. Both Regular and Backlog mark sheets can be
+ requested here.</p>
+ <div class="banner-pills">
+ <div class="banner-pill"> Processing: <strong>3 Working Days</strong></div>
+ <div class="banner-pill"> Issued by: <strong>Controller of Exams</strong></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="form-card fu fu2">
+ <div class="form-card-header">
+ <h3>Academic Details</h3>
+ </div>
+ <div class="form-card-body">
+ <div class="input-grid-2">
+ <div class="field-group">
+ <label>Semester <span class="req">*</span></label>
+ <select id="semester">
+ <option value="">Select Semester</option>
+ <option>Semester I</option>
+ <option>Semester II</option>
+ <option>Semester III</option>
+ <option>Semester IV</option>
+ <option>Semester V</option>
+ <option>Semester VI</option>
+ <option>Semester VII</option>
+ <option>Semester VIII</option>
+ </select>
+ </div>
+ <div class="field-group">
+ <label>Exam Session <span class="req">*</span></label>
+ <select id="examSession">
+ <option value="">Select Session</option>
+ <option>Winter (Oct/Nov)</option>
+ <option>Summer (May/June)</option>
+ </select>
+ </div>
+ </div>
+ <div class="input-grid-2">
+ <div class="field-group">
+ <label>Year <span class="req">*</span></label>
+ <input type="number" id="examYear" placeholder="e.g. 2024" min="2010" max="2030">
+ </div>
+ <div class="field-group">
+ <label>Result Type <span class="req">*</span></label>
+ <select id="resultType">
+ <option value="">Select Type</option>
+ <option>Regular</option>
+ <option>Backlog / Carry-Forward</option>
+ <option>Re-evaluation</option>
+ </select>
+ </div>
+ </div>
+ <div class="field-group">
+ <label>Purpose / Remarks <span class="req">*</span></label>
+ <textarea id="purpose"
+ placeholder="e.g. Required for Higher Education, Job Application..."></textarea>
+ </div>
+ </div>
+ </div>
+
+ <div class="form-card fu fu3">
+ <div class="form-card-header">
+ <h3>Upload ID Proof</h3>
+ </div>
+ <div class="form-card-body">
+ <div class="upload-group">
+ <div class="drop-zone" id="dz-idProof" ondragover="onDragOver(event,'idProof')"
+ ondragleave="onDragLeave('idProof')"
+ ondrop="onDrop(event,'idProof',2,['image/jpeg','image/png','application/pdf'])">
+ <div class="dz-default-content" id="dzd-idProof">
+ <span class="dz-icon"></span>
+ <div class="dz-text">Upload College ID Card</div>
+ <div class="dz-sub">PDF/JPG Â· Max 2MB</div>
+ </div>
+ <input type="file" accept=".pdf,.jpg,.jpeg,.png"
+ onchange="onFileInput(this,'idProof',2,['image/jpeg','image/png','application/pdf'])">
+ </div>
+ <div class="file-err" id="fe-idProof"></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="submit-card fu fu4">
+ <button class="btn-primary" onclick="submitForm()"> Request Mark Sheet</button>
+ </div>
+ </main>
+ </div>
+
+ <div class="modal-overlay" id="successModal">
+ <div class="modal-box">
+ <h3>Request Submitted!</h3>
+ <p>Your Mark Sheet request has been logged successfully.</p>
+ <div class="modal-app-id" id="modalAppId">APP-000000</div>
+ <button class="mbtn-p" onclick="window.location.href='dashboard.html'">View Status</button>
+ </div>
+ </div>
+
+ <footer class="site-footer">
+    <div class="footer-grid" style="grid-template-columns:1fr;max-width:900px;margin:0 auto;">
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="home.html">Dashboard</a></li>
+          <li><a href="documents.html">Apply for Document</a></li>
+          <li><a href="dashboard.html">My Applications</a></li>
+          <li><a href="track-status.html">Track Application</a></li>
+          <li><a href="download.html">Download Documents</a></li>
+          <li><a href="profile.html">My Profile</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Student Digital Document Services Portal. All Rights Reserved.</div>
+  </footer>
+
+ <script src="/college-portal/public/js/marksheet.js"></script>
+<script src="../js/header-info.js"></script>
+</body>
+
+</html>

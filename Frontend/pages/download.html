@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloads â€“ JDCOEM Portal</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../css/download.css">
+</head>
+
+<body>
+
+  <!-- â”€â”€ HEADER â”€â”€ -->
+  <header class="hdr">
+    <div class="hdr-inner">
+      
+      <div class="hdr-div"></div>
+      <div class="hdr-space"></div>
+      <a href="profile.html" class="profile-link">
+        <div class="user-chip">
+          <div class="u-av" id="uAv">?</div>
+          <div class="u-name" id="uName">Loadingâ€¦</div>
+        </div>
+      </a>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+
+    <!-- â”€â”€ SIDEBAR â”€â”€ -->
+    <aside class="sidebar">
+      <span class="nav-lbl">Main Menu</span>
+      <a class="nav-a" href="home.html">Dashboard</a>
+      <a class="nav-a" href="documents.html">Apply for Document</a>
+      <a class="nav-a" href="dashboard.html">My Applications <span class="nav-chip" id="sideChip">0</span></a>
+      <a class="nav-a" href="track-status.html">Track Status</a>
+      <a class="nav-a active" href="download.html">Downloads</a>
+      <span class="nav-lbl" style="margin-top:10px;">Account</span>
+      <a class="nav-a" href="profile.html">My Profile</a>
+      <a class="nav-a" href="notification.html">Notifications</a>
+      <a class="nav-a" href="help.html">Help &amp; Support</a>
+    </aside>
+
+    <!-- â”€â”€ MAIN â”€â”€ -->
+    <main class="main">
+
+      <!-- PAGE HERO -->
+      <div class="page-hero">
+        <div class="crumb">
+          <a href="home.html">Home</a><span class="sep">â€º</span>
+          <span class="cur">Downloads</span>
+        </div>
+        <div class="hero-row">
+          <div class="hero-left">
+            <h1>My Downloads</h1>
+            <p>Download your approved documents issued by JDCOEM.</p>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-pill">
+              <span class="stat-num" id="statIssued">0</span>
+              <span class="stat-lbl">Issued</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="statDownloads">0</span>
+              <span class="stat-lbl">Downloads</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <!-- LOADING STATE -->
+        <div id="loadingState" class="loading-state">
+          <div class="loading-spinner"></div>
+          <div class="loading-text">Loading your documentsâ€¦</div>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="emptyState" class="empty-state" style="display:none;">
+          <div class="es-icon"></div>
+          <div class="es-title">No Approved Documents Yet</div>
+          <div class="es-msg">Once your application is approved by the Principal, your document will appear here for
+            download.</div>
+          <div class="es-actions">
+            <a href="documents.html" class="es-btn-primary">Apply for Document</a>
+            <a href="dashboard.html" class="es-btn-secondary">Check Application Status</a>
+          </div>
+          <div class="es-pending" id="esPendingNote" style="display:none;">
+            <span id="esPendingText">You have pending applications â€” check back soon!</span>
+            <a href="track-status.html">Track Status</a>
+          </div>
+        </div>
+
+        <!-- STUDENT INFO STRIP -->
+        <div class="stu-strip fu" id="stuStrip" style="display:none;">
+          <div class="stu-av" id="stuAv">S</div>
+          <div class="stu-info">
+            <div class="stu-name" id="stuName">Student</div>
+            <div class="stu-meta">
+              <span id="stuBtid">â€”</span>
+              <span class="dot">Â·</span>
+              <span id="stuBranch">â€”</span>
+              <span class="dot">Â·</span>
+              <span id="stuYear">â€”</span>
+            </div>
+          </div>
+          <div class="stu-right">
+            <div style="font-size:11px;color:var(--g400);text-align:right;">Latest Certificate</div>
+            <div style="font-size:12px;font-weight:600;color:var(--navy);" id="siDocName">â€”</div>
+            <div style="font-size:11px;color:var(--g400);">Approved: <span id="siApproved">â€”</span></div>
+          </div>
+        </div>
+
+        <!-- DOC CARDS SECTION -->
+        <div id="docCardsSection" style="display:none;">
+          <div class="section-head">
+            <h2 class="section-title">Issued Documents</h2>
+            <span class="section-count" id="issuedCount">0 documents</span>
+          </div>
+          <div id="docCardsList"></div>
+        </div>
+
+        <!-- DIGITAL VERIFICATION -->
+        <div class="verify-card fu" id="verifySection" style="display:none;">
+          <div class="vc-head">
+            <h3>Digital Verification</h3>
+          </div>
+          <div class="vc-body">
+            <div class="vc-left">
+              <div class="vc-field">
+                <div class="vc-lbl">Verification ID</div>
+                <div class="vc-val mono" id="verId">â€”</div>
+              </div>
+              <div class="vc-field">
+                <div class="vc-lbl">Digital Signature</div>
+                <div class="vc-val mono" id="verSig">â€”</div>
+              </div>
+              <div class="vc-field">
+                <div class="vc-lbl">Issued By</div>
+                <div class="vc-val">Principal Office, JDCOEM</div>
+              </div>
+              <div class="vc-field">
+                <div class="vc-lbl">Validity</div>
+                <div class="vc-val">6 months from date of issue</div>
+              </div>
+              <div class="verify-badge">
+                <span>Digitally Signed &amp; Verified by JDCOEM</span>
+              </div>
+            </div>
+            <div class="vc-right">
+              <div class="qr-wrap">
+                <div class="qr-grid" id="qrGrid"></div>
+                <div class="qr-label">Scan to verify</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOCUMENT HISTORY -->
+        <div class="history-card fu" id="historyCard" style="display:none;">
+          <div class="hc-head">
+            <h3>Document Activity History</h3>
+          </div>
+          <div class="hc-body" id="historyBody"></div>
+        </div>
+
+        <!-- HELP & SUPPORT -->
+        <div class="help-card fu">
+          <div class="help-head">
+            <h3>Help &amp; Support</h3>
+          </div>
+          <div class="help-body">
+            <div class="help-item">
+              <div class="hi-icon" style="background:#dbeafe;"></div>
+              <div>
+                <div class="hi-label">Office Phone</div>
+                <div class="hi-val">9011010038</div>
+                <div class="hi-sub">Monâ€“Sat Â· 9 AM â€“ 5:30 PM</div>
+              </div>
+            </div>
+            <div class="help-item">
+              <div class="hi-icon" style="background:#d1fae5;"></div>
+              <div>
+                <div class="hi-label">Helpdesk Email</div>
+                <div class="hi-val"><a href="mailto:support@jdcoem.ac.in">support@jdcoem.ac.in</a></div>
+                <div class="hi-sub">Response within 1 working day</div>
+              </div>
+            </div>
+            <div class="help-item">
+              <div class="hi-icon" style="background:#fef9c3;"></div>
+              <div>
+                <div class="hi-label">Document not showing?</div>
+                <div class="hi-val">Check application status</div>
+                <div class="hi-sub"><a href="track-status.html">Track Status</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+    </main>
+  </div><!-- /page-wrap -->
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- â”€â”€ FOOTER â”€â”€ -->
+  <footer class="site-footer">
+    <div class="f-grid">
+      <div>
+        <div class="f-title">JD College of Engineering and Management</div>
+        <div class="f-text">Khandala, Post: Valni, Near Hanuman Temple,<br>Borgoan Phata, Kalmeshwar Road, Nagpur â€“
+          441501<br>9011010038 &nbsp;|&nbsp; Fax: (0712) 2023003</div>
+      </div>
+      <div>
+        <div class="f-title">Quick Links</div>
+        <div class="f-text">
+          <a href="home.html">Dashboard</a><br>
+          <a href="documents.html">Apply for Document</a><br>
+          <a href="dashboard.html">My Applications</a><br>
+          <a href="track-status.html">Track Status</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-title">Contact</div>
+        <div class="f-text">
+          <a href="mailto:info@jdcoem.ac.in">info@jdcoem.ac.in</a><br>
+          <a href="mailto:support@jdcoem.ac.in">support@jdcoem.ac.in</a>
+        </div>
+      </div>
+    </div>
+    <div class="f-bottom">&copy; 2025 JD College of Engineering and Management &nbsp;|&nbsp; Student Digital Document
+      Services Portal</div>
+  </footer>
+
+  <script src="../js/download.js"></script>
+<script src="../js/header-info.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Verification — DigiSecure</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/home.css">
+
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-mid: #122040;
+            --navy-light: #1e3a5f;
+            --saffron: #d4781a;
+            --saffron-light: #f4a83a;
+            --saffron-pale: #fff4e6;
+            --gold: #c8a84b;
+            --white: #ffffff;
+            --cream: #faf8f3;
+            --cream-dark: #f0ede3;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --success: #16a34a;
+            --success-bg: #f0fdf4;
+            --success-border: #86efac;
+            --error: #dc2626;
+            --error-bg: #fef2f2;
+            --warn: #d97706;
+            --warn-bg: #fffbeb;
+            --warn-border: #fcd34d;
+            --radius: 8px;
+            --radius-lg: 12px;
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.14);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+            background: var(--cream);
+            color: var(--gray-700);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-strip {
+            height: 6px;
+            background: linear-gradient(90deg, var(--saffron) 0%, var(--gold) 50%, #f0d070 100%);
+            width: 100%;
+        }
+
+        .site-header {
+            background: var(--navy);
+            border-bottom: 3px solid var(--navy-mid);
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+        }
+
+        .college-text h1 {
+            font-family: 'Noto Serif', serif;
+            font-size: 22px;
+            color: var(--white);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .page-main {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 20px 60px;
+            max-width: 700px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .verify-box {
+            flex: 1;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .result {
+            padding: 36px 40px;
+            display: none;
+        }
+
+        .result.authentic {
+            background: var(--success-bg);
+            border-top: 4px solid var(--success);
+        }
+
+        .result.notfound {
+            background: var(--warn-bg);
+            border-top: 4px solid var(--warn);
+        }
+
+        .result.error {
+            background: var(--gray-100);
+            border-top: 4px solid var(--gray-400);
+        }
+
+        .result-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .result-title {
+            font-family: 'Noto Serif', serif;
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .result.authentic .result-title {
+            color: var(--success);
+        }
+
+        .result.notfound .result-title {
+            color: var(--warn);
+        }
+
+        .result.error .result-title {
+            color: var(--gray-700);
+        }
+
+        .result-msg {
+            font-size: 14.5px;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 500px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: var(--radius);
+            padding: 12px 14px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .info-item .lbl {
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            margin-bottom: 4px;
+        }
+
+        .info-item .val {
+            font-size: 14px;
+            font-weight: 600;
+            word-break: break-word;
+            color: var(--gray-900);
+        }
+
+        .timeline {
+            margin-top: 24px;
+        }
+
+        .tl-heading {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            margin-bottom: 12px;
+        }
+
+        .tl-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+            font-size: 13.5px;
+        }
+
+        .tl-item:last-child {
+            border-bottom: none;
+        }
+
+        .tl-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        .tl-actor {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .tl-action {
+            color: var(--gray-600);
+        }
+
+        .tl-time {
+            font-size: 11.5px;
+            color: var(--gray-400);
+            margin-top: 2px;
+        }
+
+        .tl-comment {
+            font-size: 12.5px;
+            color: var(--gray-500);
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .badge-green {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-blue {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-red {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-amber {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        #loader {
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.08);
+            border-left-color: var(--navy);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loader-text {
+            font-size: 16px;
+            color: var(--gray-600);
+            font-family: 'Noto Serif', serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-strip"></div>
+    <header class="site-header">
+        <div class="header-inner">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <img src="./assets/logo_left.png" alt="JDCOEM Logo" style="height: 54px; width: auto;">
+                <div class="college-text">
+                    <h1 style="font-size: 20px;">JD College of Engineering & Management</h1>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 13.5px; font-weight: 500;">Student Digital
+                        Document Services</div>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="verify.html"
+                    style="color:var(--white); text-decoration:none; font-size:13px; opacity:0.8; padding: 6px 12px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px;">Manual
+                    Verify</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-main">
+        <div class="verify-box">
+            <div id="loader">
+                <div class="spinner"></div>
+                <div class="loader-text">Verifying Document Integrity...</div>
+            </div>
+            <div id="result" class="result"></div>
+        </div>
+    </main>
+
+    <script>
+        // Smart API detection for both local dev and ngrok/deployment
+        const API_BASE = (window.location.port === '3000') 
+            ? 'http://localhost:5000/api' 
+            : window.location.origin + '/api';
+
+        const statusMap = {
+            pending: ['badge-amber', 'Pending'],
+            clerk_approved: ['badge-blue', 'Verified'],
+            hod_approved: ['badge-blue', 'Approved'],
+            principal_approved: ['badge-green', 'Approved'],
+            rejected: ['badge-red', 'Rejected'],
+        };
+
+        function badge(s) {
+            const [cls, lbl] = statusMap[s] || ['badge-amber', s || 'Unknown'];
+            return `<span class="badge ${cls}">${lbl}</span>`;
+        }
+
+        function infoGrid(items) {
+            return `<div class="info-grid">${items.map(([l, v]) =>
+                `<div class="info-item"><div class="lbl">${l}</div><div class="val">${v}</div></div>`
+            ).join('')}</div>`;
+        }
+
+        function fmtDate(ds) {
+            if (!ds) return '—';
+            const d = new Date(ds);
+            return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' +
+                d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }).toLowerCase();
+        }
+
+        function timelineSection(tl) {
+            if (!tl || !tl.length) return '';
+            return `<div class="timeline">
+                <div class="tl-heading">Verification Timeline</div>
+                ${tl.map(t => `<div class="tl-item">
+                    <div class="tl-dot"></div>
+                    <div>
+                        <div><span class="tl-actor">${t.actor}</span> <span class="tl-action">— ${t.action}</span></div>
+                        ${t.comment ? `<div class="tl-comment">"${t.comment}"</div>` : ''}
+                        <div class="tl-time">${fmtDate(t.timestamp)}</div>
+                    </div>
+                </div>`).join('')}
+            </div>`;
+        }
+
+        function showError(title, msg, detail) {
+            const el = document.getElementById('result');
+            el.className = 'result error';
+            el.style.display = 'block';
+            el.innerHTML = `
+                <span class="result-icon">⚠️</span>
+                <div class="result-title">${title}</div>
+                <div class="result-msg">${msg}</div>
+                ${detail ? `
+                <div style="font-size:12px;color:var(--gray-500);margin-top:10px;padding-top:10px;border-top:1px solid var(--gray-200);">
+                    ${detail}
+                </div>
+                ` : ''}
+                <div style="margin-top:20px; padding:15px; background:var(--gray-50); border:1px solid var(--gray-200); border-radius:var(--radius);">
+                    <div style="font-size:12px; font-weight:700; color:var(--gray-600); margin-bottom:8px; text-transform:uppercase;">Manual Verification Fallback</div>
+                    <div style="display:flex; gap:8px;">
+                        <input type="text" id="manualId" placeholder="Enter Application ID (e.g. JDCOEM/2026/...)" style="flex:1; padding:8px 12px; border:1px solid var(--gray-300); border-radius:4px; font-size:13px;">
+                        <button onclick="fetchVerificationDatsa(document.getElementById('manualId').value.trim())" style="padding:8px 16px; background:var(--navy); color:white; border:none; border-radius:4px; font-size:13px; cursor:pointer;">Verify</button>
+                    </div>
+                </div>`;
+        }
+
+        function showNotFound(id) {
+            const el = document.getElementById('result');
+            el.className = 'result notfound';
+            el.style.display = 'block';
+            el.innerHTML = `
+                <span class="result-icon">❓</span>
+                <div class="result-title">Record Not Found</div>
+                <div class="result-msg">Document ID <strong>${id || 'Unknown'}</strong> 
+                was scanned, but no official record exists in our database.
+                <br><br>
+                <small>This could mean the document is unissued or the verification link is incorrect.</small></div>`;
+        }
+
+        function showSuccess(data) {
+            const el = document.getElementById('result');
+            el.className = 'result authentic';
+            el.style.display = 'block';
+
+            const infoItems = [
+                ['Student Name', data.studentName],
+                ['Document Type', data.documentType],
+                ['Application ID', data.applicationId],
+                ['Current Status', badge(data.status)],
+                ['Issue Date', fmtDate(data.issuedAt)]
+            ];
+
+            el.innerHTML = `
+                <span class="result-icon">✅</span>
+                <div class="result-title">Official Document Authenticated</div>
+                <div class="result-msg">This record verifies that the document below was officially issued by JDCOEM DigiSecure.</div>
+                ${infoGrid(infoItems)}
+                ${timelineSection(data.timeline)}
+            `;
+        }
+
+        async function fetchVerificationData(id) {
+            const elLoader = document.getElementById('loader');
+            const elResult = document.getElementById('result');
+            elResult.style.display = 'none';
+            elLoader.style.display = 'flex';
+
+            try {
+                // Fetch from dynamic backend host
+                const res = await fetch(`${API_BASE}/verify/data/${encodeURIComponent(id)}`);
+                const json = await res.json();
+
+                elLoader.style.display = 'none';
+
+                if (res.status === 404) {
+                    showNotFound(id);
+                } else if (!json.success || !json.data) {
+                    showError('Incomplete Record', json.message || 'The server returned an invalid response.', '');
+                } else {
+                    showSuccess(json.data);
+                }
+            } catch (err) {
+                elLoader.style.display = 'none';
+                showError('Server Unreachable', 'Could not connect to the verification server.',
+                    'Connection tried to: ' + API_BASE + '<br>Please ensure you have an active internet connection or are on the college network.');
+            }
+        }
+
+        async function init() {
+            // 1. Try URL Query Parameters (?id=...)
+            const urlParams = new URLSearchParams(window.location.search);
+            let id = urlParams.get('id');
+
+            // 2. Try Hash Fragment (#id=... or just #...) as fallback
+            if (!id && window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                const hashParams = new URLSearchParams(hash);
+                id = hashParams.get('id') || hash; // Try #id=... then just #...
+                if (id) console.log('[INIT] Found ID in hash:', id);
+            }
+
+            // 3. Try Pathname Fallback (e.g. /Frontend/qr-verify/ID)
+            if (!id) {
+                const segments = window.location.pathname.split('/').filter(Boolean);
+                // If last segment isn't 'qr-verify' or 'qr-verify.html', it might be the ID
+                const last = segments[segments.length - 1];
+                if (last && last !== 'qr-verify' && last !== 'qr-verify.html') {
+                    id = last;
+                    console.log('[INIT] Found ID in pathname:', id);
+                }
+            }
+
+            if (!id) {
+                document.getElementById('loader').style.display = 'none';
+
+                // Enhanced diagnostics for user help
+                const trace = `
+                    <strong>URL:</strong> ${window.location.href}<br>
+                    <strong>Search:</strong> "${window.location.search}"<br>
+                    <strong>Hash:</strong> "${window.location.hash}"<br>
+                    <strong>Path:</strong> "${window.location.pathname}"
+                `;
+
+                showError('No ID Found',
+                    'Please scan a valid QR code from an official certificate. The document ID could not be detected in the URL.',
+                    `Diagnostic Details:<br>${trace}`);
+                return;
+            }
+
+            console.log('[INIT] Verifying ID:', id);
+            fetchVerificationData(id);
+        }
+
+        window.onload = init;
+    </script>
+</body>
+
+</html>
