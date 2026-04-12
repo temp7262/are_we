@@ -32,6 +32,13 @@ app.use('/api/documents', require('./routes/documents').router);
 app.use('/api/verify', require('./routes/verify'));
 app.use('/api/admin', require('./routes/admin'));
 
+
+app.get('/api/debug', (req, res) => {
+  res.json({
+    mongo_uri_exists: !!process.env.MONGO_URI,
+    node_env: process.env.NODE_ENV,
+  });
+});
 // Basic Route for testing
 app.get('/', (req, res) => {
   sendResponse(res, 200, true, null, 'DigiSecure API is running');
