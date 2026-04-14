@@ -3,7 +3,13 @@
    Flow: Login/Register → OTP sent → Verify OTP → home.html
    ============================================================ */
 
-const API_BASE = "http://localhost:5000/api";
+// Use smart API detection — if config.js already loaded API_BASE, reuse it;
+// otherwise detect based on current host (works on Vercel, ngrok, localhost)
+if (typeof API_BASE === 'undefined') {
+    var API_BASE = (window.location.port === '3000')
+        ? 'http://localhost:5000/api'
+        : window.location.origin + '/api';
+}
 /* ── OTP PANEL INJECTED DYNAMICALLY ── */
 (function injectOtpPanel() {
     const panel = document.createElement('div');

@@ -4,7 +4,10 @@
    Connected to Backend API (Node.js/JWT)
    ================================================ */
 
-const API_BASE = "http://localhost:5000/api";
+// Smart API detection (works on Vercel, ngrok, localhost)
+var API_BASE = (window.location.port === '3000')
+    ? 'http://localhost:5000/api'
+    : window.location.origin + '/api';
 const uploadedFiles = {};
 
 function getAuthHeaders() {

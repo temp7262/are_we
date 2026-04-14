@@ -1,5 +1,8 @@
-const API_BASE = "http://localhost:5000/api";
-const FILES_BASE = "http://localhost:5000/";
+// Smart API detection (works on Vercel, ngrok, localhost)
+var API_BASE = (window.location.port === '3000')
+    ? 'http://localhost:5000/api'
+    : window.location.origin + '/api';
+var FILES_BASE = window.location.origin + '/';
 
 function getAuthHeaders() {
     return {

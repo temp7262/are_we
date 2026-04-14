@@ -2,7 +2,7 @@
    hod.js — HOD Dashboard (Node.js/JWT Version)
    ============================================================ */
 
-const FILES_BASE = "http://localhost:5000/";
+var FILES_BASE = window.location.origin + '/';
 
 function getAuthHeaders() {
   const token = localStorage.getItem('admin_token_hod');
