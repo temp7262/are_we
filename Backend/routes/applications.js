@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 const Application = require('../models/Application');
 const AuditLog = require('../models/AuditLog');
 const verifyToken = require('../middleware/auth');
@@ -28,7 +28,7 @@ const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
 router.post('/', verifyToken, roleGuard(['student']), upload.array('proofDocs', 5), async (req, res) => {
   try {
     const { applicationType, purpose, extraData } = req.body; 
-    const trackingId = uuidv4();
+    const trackingId = crypto.randomUUID();
     const year = new Date().getFullYear();
     const seq = await getNextSequence('applicationId');
     const applicationId = `JDCOEM/${year}/${String(seq).padStart(4, '0')}`; 

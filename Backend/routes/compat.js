@@ -12,7 +12,7 @@ const router     = express.Router();
 const path       = require('path');
 const fs         = require('fs');
 const multer     = require('multer');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 
 const User        = require('../models/User');
 const Application = require('../models/Application');
@@ -146,7 +146,7 @@ async function createApplication(req, res) {
   try {
     const { certificate_type, purpose, extra_data } = req.body;
     const applicationId = `APP-${Date.now()}`;
-    const trackingId    = uuidv4();
+    const trackingId    = crypto.randomUUID();
 
     const uploadedProofs = (req.files || []).map(file => ({
       documentName: file.originalname,
