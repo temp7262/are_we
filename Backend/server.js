@@ -7,8 +7,15 @@ const { sendResponse } = require('./utils/response');
 
 const app = express();
 
-// Connect Database
-connectDB();
+// Serverless DB Connection Middleware
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    return sendResponse(res, 500, false, null, 'Database connection failed. Please check MongoDB Atlas IP whitelisting.');
+  }
+});
 
 // Middleware
 app.use(cors({
