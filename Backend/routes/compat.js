@@ -22,11 +22,12 @@ const roleGuard   = require('../middleware/role');
 const { sendResponse } = require('../utils/response');
 
 /* ── Multer setup (mirrors applications.js) ─────────────────── */
-if (!fs.existsSync('./uploads/proofs')) {
-  fs.mkdirSync('./uploads/proofs', { recursive: true });
+const UPLOAD_DIR = process.env.NODE_ENV === 'production' ? '/tmp/uploads/proofs' : './uploads/proofs';
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 }
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, './uploads/proofs/'),
+  destination: (req, file, cb) => cb(null, UPLOAD_DIR),
   filename:    (req, file, cb) => cb(null, Date.now() + '-' + file.originalname),
 });
 const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });

@@ -12,13 +12,15 @@ const fs = require('fs');
 const { getNextSequence } = require('../utils/counter');
 const sendEmail = require('../utils/sendEmail');
 
+const UPLOAD_DIR = process.env.NODE_ENV === 'production' ? '/tmp/uploads/proofs' : './uploads/proofs';
+
 // Ensure uploads folder exists
-if (!fs.existsSync('./uploads/proofs')) {
-  fs.mkdirSync('./uploads/proofs', { recursive: true });
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 }
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, './uploads/proofs/'),
+  destination: (req, file, cb) => cb(null, UPLOAD_DIR),
   filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
 // Allow up to 5 files (e.g., photo + fees receipt), Max 5MB per file
